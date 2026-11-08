@@ -467,6 +467,13 @@ footer{width:100%;margin-top:clamp(20px,3vh,40px)}
   .fgrid{grid-template-columns:1fr}
   .contact{padding-bottom:0}
 }
+/* телефон / звичайна прокрутка: кожен елемент з'являється сам, плавно, коли до нього догорнули */
+html:not(.fp) .slide .rv{transition:opacity 1.2s cubic-bezier(.22,.61,.36,1),transform 1.4s cubic-bezier(.22,.61,.36,1),background .35s,color .35s;transition-delay:0s}
+html:not(.fp) .seen .rv:not(.in){opacity:0;transform:translateY(36px)}
+html:not(.fp) .about.seen .stat.rv:not(.in){opacity:0;transform:translateY(36px)}
+html:not(.fp) .rv.in{opacity:1;transform:none}
+html:not(.fp) .seen .h2:not(.in) .w>span{transform:translateY(108%)}
+html:not(.fp) .h2 .w>span{transition:transform 1.25s cubic-bezier(.22,.61,.36,1);transition-delay:var(--d,0s)}
 @media (max-width:560px){
   .tiles{grid-template-columns:1fr}
   .stats{grid-template-columns:1fr 1fr}
@@ -929,6 +936,9 @@ function setMode(){
     slides.forEach(s=>io.observe(s));
     // поява анімацій: щойно верх наступного екрана зайшов у нижню частину вікна (не чекаємо, поки попередній прокрутиться)
     const rvIO=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){en.target.classList.add('seen');countUp(en.target)}}),{rootMargin:'0px 0px -8% 0px',threshold:0});
+    // кожен елемент окремо: плавна поява саме тоді, коли він заходить у кадр
+    const elIO=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){en.target.classList.add('in');elIO.unobserve(en.target)}}),{rootMargin:'0px 0px -6% 0px',threshold:0});
+    $$('.rv').forEach(el=>elIO.observe(el));
     slides.forEach(s=>rvIO.observe(s));
     addEventListener('scroll',()=>top.classList.toggle('solid',scrollY>40),{passive:true});
   }
