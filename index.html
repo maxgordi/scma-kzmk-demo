@@ -862,7 +862,8 @@ let lastT=0, lastD=0, used=false;
 addEventListener('wheel',e=>{ if(!fp)return; if(e.ctrlKey)return; e.preventDefault();
   const raw=Math.abs(e.deltaX)>Math.abs(e.deltaY)?e.deltaX:e.deltaY;
   const now=performance.now(), d=e.deltaMode===1?raw*16:raw, ad=Math.abs(d);
-  const fresh=now-lastT>140||ad>Math.abs(lastD)*1.6+4;
+  // новий жест: потік прокрутки затих ≥200 мс, або явний різкий ривок (інерція тачпада Mac таких не дає)
+  const fresh=now-lastT>200||(ad>=80&&ad>Math.abs(lastD)*5);
   lastT=now; lastD=d; if(fresh)used=false;
   if(lock||used||ad<1)return;
   // над карточками проєктів колесо гортає картки; на краю — переходить на сусідній екран
