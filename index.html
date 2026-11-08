@@ -454,6 +454,14 @@ footer{width:100%;margin-top:clamp(20px,3vh,40px)}
   .acc .cap{bottom:18px}
   .acc .panel:not(.on) .cap .h3{transform:none!important;position:static!important}
   .acc .panel:not(.on) img{filter:grayscale(1) brightness(.4)}
+  /* згорнута смуга: заголовок по центру, опис прибрано (інакше виштовхує заголовок за край) */
+  .acc .panel:not(.on) .cap{top:50%;bottom:auto;right:56px;transform:translateY(-50%)}
+  .acc .panel:not(.on) .cap p{display:none}
+  .acc .panel:not(.on) .cap .h3{white-space:normal;font-size:19px}
+  .acc .panel:not(.on) .tick{display:none}
+  .acc .panel::before{content:"";position:absolute;right:20px;top:50%;width:10px;height:10px;z-index:2;border-right:2px solid var(--yellow);border-bottom:2px solid var(--yellow);
+    transform:translateY(-70%) rotate(45deg);transition:transform .4s var(--ease-out),opacity .3s}
+  .acc .panel.on::before{opacity:0}
   .card{flex-basis:82vw;height:420px}
   .logos{grid-template-columns:repeat(3,1fr)}
   .fgrid{grid-template-columns:1fr}
@@ -496,7 +504,6 @@ footer{width:100%;margin-top:clamp(20px,3vh,40px)}
       <div class="ua-line"></div>
       <a class="mc-phone" href="tel:+380676326798">+38 (067) 632-67-98</a>
       <a class="mc-mail" href="mailto:scma@ukr.net">scma@ukr.net</a>
-      <a class="btn btn-y" href="tel:+380676326798"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>Зателефонувати</a>
     </div>
   </nav>
   <a class="top-phone" href="tel:+380676326798">+38 (067) 632-67-98</a>
