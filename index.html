@@ -444,8 +444,12 @@ footer{width:100%;margin-top:clamp(20px,3vh,40px)}
   .products .head,.ind .head,.proj .head{flex-direction:column;align-items:flex-start;gap:16px}
   .steps{grid-template-columns:1fr;border-top:0}
   .step{padding:16px 0 16px 18px;border-left:1px solid var(--line-strong)}
-  .step::before{left:-1px;top:0;width:3px;height:0;transition:height .6s var(--ease-out)}
-  .step.on::before{width:3px;height:100%}
+  /* жовта смуга росте разом із прокруткою (--p = 0…1 рахує JS) */
+  .step::before{left:-1px;top:0;width:3px;height:calc(var(--p,0) * 100%);transition:height .12s linear}
+  .step.on::before{width:3px;height:calc(var(--p,0) * 100%)}
+  .step .h3,.step p{transition:opacity .4s,color .4s}
+  .step:not(.on) .h3,.step:not(.on) p{opacity:.55}
+  .step.on .h3,.step.on p{opacity:1}
   .step p,.step .h3{opacity:1}
   .mosaic{height:auto;grid-template-rows:200px 160px}
   .acc{flex-direction:column;height:auto}
@@ -895,17 +899,28 @@ function go(i){
 /* ---------- input (fullpage mode) ---------- */
 // One wheel notch = one slide. Trackpad inertia is ignored until the gesture ends
 // (pause > 140 ms) or a new flick starts (delta suddenly grows).
-let lastT=0, lastD=0, used=false, acc=0, cardT=0;
+let lastT=0, lastD=0, used=false, acc=0, cardT=0, minSince=Infinity, rising=0, lastDir=0, phase='up';
 addEventListener('wheel',e=>{ if(!fp)return; if(e.ctrlKey)return; e.preventDefault();
   const raw=Math.abs(e.deltaX)>Math.abs(e.deltaY)?e.deltaX:e.deltaY;
-  const now=performance.now(), d=e.deltaMode===1?raw*16:raw, ad=Math.abs(d);
-  // новий жест: потік прокрутки затих ≥200 мс, або явний різкий ривок (інерція тачпада Mac таких не дає)
-  const fresh=now-lastT>200||(ad>=80&&ad>Math.abs(lastD)*5);
-  lastT=now; lastD=d; if(fresh){used=false;acc=0}
+  const now=performance.now(), d=e.deltaMode===1?raw*16:raw, ad=Math.abs(d), dir=Math.sign(d);
+  // Новий жест, навіть якщо інерція попереднього свайпу ще йде (мишку не рухали):
+  //  - пауза ≥200 мс;  - зміна напрямку;
+  //  - розгін: сила росте 2 події поспіль і стала ≥12 та втричі більшою за мінімум згасання (інерція лише згасає);
+  //  - різкий ривок (коліщатко миші).
+  // фаза жесту: 'up' — розгін (палець), 'down' — згасання (інерція). Новий розгін рахується лише після згасання.
+  if(phase==='up'&&ad<Math.abs(lastD)){phase='down';minSince=ad}
+  if(phase==='down'&&ad<minSince)minSince=ad;
+  rising=ad>Math.abs(lastD)?rising+1:0;
+  const gap=now-lastT>200, flip=lastDir&&dir&&dir!==lastDir, ramp=phase==='down'&&rising>=2&&ad>=12&&ad>=minSince*3, kick=ad>=80&&ad>Math.abs(lastD)*5;
+  const fresh=gap||flip||ramp||kick;
+  lastT=now; lastD=d; if(dir)lastDir=dir;
+  if(fresh){used=false;acc=0;minSince=Infinity;rising=0;phase='up'}
   if(lock||ad<1)return;
-  // над картками проєктів: безперервний свайп веде картки одну за одною (накопичення + обмеження частоти);
-  // дійшовши до краю, той самий свайп не перескакує на інший екран — потрібен новий жест
-  if(slides[cur].id==='projects'&&e.target.closest&&e.target.closest('.track-wrap')){
+  // над картками проєктів (перевірка за координатами курсора — після перегортання браузер пам'ятає старий елемент під мишкою):
+  // безперервний свайп веде картки одну за одною; дійшовши до краю, той самий свайп не перескакує на інший екран
+  const tw=$('.track-wrap').getBoundingClientRect();
+  const overCards=e.clientX>=tw.left&&e.clientX<=tw.right&&e.clientY>=tw.top&&e.clientY<=tw.bottom;
+  if(slides[cur].id==='projects'&&overCards){
     const dir=d>0?1:-1, np=pI+dir;
     if(np>=0&&np<=lastP()){
       if(Math.sign(acc)!==dir)acc=0; acc+=d;
@@ -992,7 +1007,14 @@ $('.burger').onclick=()=>{const o=document.body.classList.toggle('menu-open');$(
 const steps=$$('.step'), bgs=$$('.cycle .bgs img'); let sIdx=0, sTimer;
 function setStep(i){sIdx=i;steps.forEach((s,k)=>{s.classList.toggle('on',k===i);s.setAttribute('aria-selected',k===i)});bgs.forEach((b,k)=>b.classList.toggle('on',k===i))}
 steps.forEach((s,i)=>{s.addEventListener('click',()=>{setStep(i);clearInterval(sTimer)});s.addEventListener('mouseenter',()=>{setStep(i);clearInterval(sTimer)})});
-const cyc=$('#cycle'); new MutationObserver(()=>{clearInterval(sTimer);if(cyc.classList.contains('is-active')&&!reduce)sTimer=setInterval(()=>setStep((sIdx+1)%steps.length),4200)}).observe(cyc,{attributes:true,attributeFilter:['class']});
+const cyc=$('#cycle'); new MutationObserver(()=>{clearInterval(sTimer);if(fp&&cyc.classList.contains('is-active')&&!reduce)sTimer=setInterval(()=>setStep((sIdx+1)%steps.length),4200)}).observe(cyc,{attributes:true,attributeFilter:['class']});
+// телефон / звичайна прокрутка: смуга заповнюється слідом за прокруткою, активний — крок біля середини екрана
+let stepRaf=0;
+function stepsFollow(){stepRaf=0; if(fp)return; const mid=innerHeight*.55; let act=-1;
+  steps.forEach((s,k)=>{const r=s.getBoundingClientRect(); const p=Math.min(1,Math.max(0,(mid-r.top)/r.height)); s.style.setProperty('--p',p.toFixed(3)); if(r.top<=mid)act=k;});
+  if(act>=0&&act!==sIdx)setStep(act); else if(act<0&&sIdx!==0)setStep(0);}
+addEventListener('scroll',()=>{if(!stepRaf)stepRaf=requestAnimationFrame(stepsFollow)},{passive:true});
+addEventListener('resize',()=>{if(!stepRaf)stepRaf=requestAnimationFrame(stepsFollow)});
 
 /* ---------- industries accordion ---------- */
 const panels=$$('.acc .panel');
