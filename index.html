@@ -466,7 +466,11 @@ footer{width:100%;margin-top:clamp(20px,3vh,40px)}
   .acc .panel::before{content:"";position:absolute;right:20px;top:50%;width:10px;height:10px;z-index:2;border-right:2px solid var(--yellow);border-bottom:2px solid var(--yellow);
     transform:translateY(-70%) rotate(45deg);transition:transform .4s var(--ease-out),opacity .3s}
   .acc .panel.on::before{opacity:0}
-  .card{flex-basis:82vw;height:420px}
+  .card{flex-basis:82vw;height:420px;scroll-snap-align:start}
+  /* картки гортаються пальцем: нативна горизонтальна прокрутка з примагнічуванням */
+  .track-wrap{overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;scrollbar-width:none;touch-action:pan-x pan-y}
+  .track-wrap::-webkit-scrollbar{display:none}
+  .track{transform:none!important;transition:none;padding-right:var(--pad)}
   .logos{grid-template-columns:repeat(3,1fr)}
   .fgrid{grid-template-columns:1fr}
   .contact{padding-bottom:0}
@@ -935,8 +939,11 @@ addEventListener('keydown',e=>{ if(!fp||lock)return; if(/INPUT|TEXTAREA|SELECT/.
   if(['ArrowDown','PageDown',' '].includes(e.key)){e.preventDefault();go(cur+1)}
   else if(['ArrowUp','PageUp'].includes(e.key)){e.preventDefault();go(cur-1)}
   else if(e.key==='Home'){e.preventDefault();go(0)} else if(e.key==='End'){e.preventDefault();go(N-1)}});
-let ty=null; addEventListener('touchstart',e=>{ty=e.touches[0].clientY},{passive:true});
-addEventListener('touchend',e=>{if(!fp||ty===null||lock)return;const dy=ty-e.changedTouches[0].clientY;if(Math.abs(dy)>50)go(cur+(dy>0?1:-1));ty=null},{passive:true});
+let ty=null, tx=null; addEventListener('touchstart',e=>{ty=e.touches[0].clientY;tx=e.touches[0].clientX},{passive:true});
+addEventListener('touchend',e=>{if(!fp||ty===null||lock)return;const dy=ty-e.changedTouches[0].clientY, dx=tx-e.changedTouches[0].clientX;
+  // планшет у режимі слайдів: свайп убік по картках проєктів гортає картки
+  if(Math.abs(dx)>Math.abs(dy)&&Math.abs(dx)>40&&slides[cur].id==='projects'&&e.target.closest&&e.target.closest('.track-wrap')){setP(Math.max(0,Math.min(lastP(),pI+(dx>0?1:-1))));ty=null;return}
+  if(Math.abs(dy)>50)go(cur+(dy>0?1:-1));ty=null},{passive:true});
 // keep focused elements on screen
 document.addEventListener('focusin',e=>{if(!fp)return;const s=e.target.closest('.slide');if(s){const i=slides.indexOf(s);if(i!==cur){go(i)}}});
 $$('[data-go]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();document.body.classList.remove('menu-open');go(+a.dataset.go)}));
@@ -1022,8 +1029,17 @@ panels.forEach(p=>{const on=()=>panels.forEach(q=>q.classList.toggle('on',q===p)
 
 /* ---------- projects slider ---------- */
 const track=$('.track'), cards=$$('.card'), pg=$('.arrows .pg b'); let pI=0;
+const wrapEl=track.parentElement;
 function setP(i){pI=(i+cards.length)%cards.length;const w=cards[0].getBoundingClientRect().width+12;
-  const maxShift=track.scrollWidth-track.parentElement.clientWidth; track.style.transform=`translateX(${-Math.min(pI*w,Math.max(0,maxShift))}px)`;pg.textContent=String(pI>=lastP()?cards.length:pI+1).padStart(2,'0')}
+  const maxShift=track.scrollWidth-wrapEl.clientWidth;
+  if(!fp){ // телефон: нативна прокрутка пальцем, стрілки просто прокручують контейнер
+    track.style.transform=''; wrapEl.scrollTo({left:Math.min(pI*w,Math.max(0,maxShift)),behavior:reduce?'auto':'smooth'});
+  } else track.style.transform=`translateX(${-Math.min(pI*w,Math.max(0,maxShift))}px)`;
+  pg.textContent=String(pI>=lastP()?cards.length:pI+1).padStart(2,'0')}
+// лічильник слідує за свайпом пальцем
+let pRaf=0;
+wrapEl.addEventListener('scroll',()=>{if(fp||pRaf)return;pRaf=requestAnimationFrame(()=>{pRaf=0;const w=cards[0].getBoundingClientRect().width+12,max=track.scrollWidth-wrapEl.clientWidth;
+  pI=Math.round(wrapEl.scrollLeft/w); pg.textContent=String(wrapEl.scrollLeft>=max-4?cards.length:pI+1).padStart(2,'0')})},{passive:true});
 function lastP(){const w=cards[0].getBoundingClientRect().width+12, maxShift=track.scrollWidth-track.parentElement.clientWidth;return Math.max(0,Math.ceil(maxShift/w-.01))}
 $('.arrows .next').onclick=()=>setP(pI>=lastP()?0:pI+1); $('.arrows .prev').onclick=()=>setP(pI<=0?lastP():pI-1);
 addEventListener('resize',()=>setP(pI));
