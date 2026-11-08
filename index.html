@@ -90,6 +90,11 @@ footer .brand{font-size:24px;opacity:.9}
 .nav a.on::after,.nav a:hover::after{right:0}
 .top-phone{font-family:"Tektur";font-variation-settings:"wdth" 75;font-size:20px;font-weight:600;letter-spacing:.02em;white-space:nowrap}
 .top .btn{--h:42px;font-size:15px;padding:0 18px}
+.menu-contacts{display:none;flex-direction:column;gap:10px;margin-top:auto;padding-top:24px}
+.menu-contacts .ua-line{margin-bottom:12px}
+.menu-contacts .mc-phone{font-family:"Tektur";font-variation-settings:"wdth" 75;font-size:30px;font-weight:600;color:var(--white)}
+.menu-contacts .mc-mail{font-size:17px;color:rgba(247,247,247,.8)}
+.menu-contacts .btn{margin-top:8px;width:100%}
 .burger{display:none;margin-left:auto;width:44px;height:44px;background:none;border:0;cursor:pointer;position:relative}
 .burger span{position:absolute;left:10px;right:10px;height:2px;background:var(--white);transition:transform .3s,opacity .3s}
 .burger span:nth-child(1){top:15px}.burger span:nth-child(2){top:21px}.burger span:nth-child(3){top:27px}
@@ -413,8 +418,15 @@ footer{width:100%;margin-top:clamp(20px,3vh,40px)}
   .index,.counter{display:none}
   .top .btn,.top-phone{display:none}
   .burger{display:block}
-  .menu-open .nav{display:flex;position:fixed;inset:var(--head) 0 0 0;flex-direction:column;gap:6px;padding:28px var(--pad);background:rgba(8,9,15,.97);margin:0}
-  .menu-open .nav a{font-family:"Tektur";font-variation-settings:"wdth" 75;font-size:34px;text-transform:uppercase;font-weight:600}
+  /* відкрите меню: шапка без blur (інакше fixed-меню обрізається шапкою і просвічує) */
+  body.menu-open{overflow:hidden}
+  .menu-open .top{backdrop-filter:none;-webkit-backdrop-filter:none;background:var(--bg)}
+  .menu-open .nav{display:flex;position:fixed;top:var(--head);left:0;right:0;bottom:0;height:calc(100dvh - var(--head));overflow-y:auto;flex-direction:column;gap:4px;padding:24px var(--pad) 32px;background:var(--bg);margin:0;z-index:60;border-top:1px solid var(--line)}
+  .menu-open .nav>a{font-family:"Tektur";font-variation-settings:"wdth" 75;font-size:32px;text-transform:uppercase;font-weight:600;padding:4px 0}
+  .menu-open .nav>a::after{display:none}
+  .menu-open .menu-contacts{display:flex}
+  .menu-open .menu-contacts .btn{display:inline-flex;--h:52px;font-size:17px;padding:0 26px;color:var(--ink)}
+  .menu-open .menu-contacts a::after{display:none}
   .slide{padding-top:52px;padding-bottom:44px;scroll-margin-top:var(--head)}
   .hero{min-height:92svh;padding-top:calc(var(--head) + 24px);padding-bottom:64px}
   .hero-foot .l,.hero-foot .r,.hero-foot .cue{display:none}
@@ -474,6 +486,12 @@ footer{width:100%;margin-top:clamp(20px,3vh,40px)}
     <a href="#projects" data-go="6">Проєкти</a>
     <a href="#tenders" data-go="8">Тендерам</a>
     <a href="#contact" data-go="9">Контакти</a>
+    <div class="menu-contacts">
+      <div class="ua-line"></div>
+      <a class="mc-phone" href="tel:+380676326798">+38 (067) 632-67-98</a>
+      <a class="mc-mail" href="mailto:scma@ukr.net">scma@ukr.net</a>
+      <a class="btn btn-y" href="tel:+380676326798"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>Зателефонувати</a>
+    </div>
   </nav>
   <a class="top-phone" href="tel:+380676326798">+38 (067) 632-67-98</a>
   <a class="btn btn-y" href="#contact" data-go="9">Розрахувати проєкт</a>
@@ -729,7 +747,6 @@ footer{width:100%;margin-top:clamp(20px,3vh,40px)}
     <div class="f-row">
       <span class="brand" role="img" aria-label="SCMA KZMK"><span class="b-row"><span class="b-word"><span>S</span><span>C</span><span>M</span><span>A</span></span><span class="b-sup"><span>K</span><span>Z</span><span>M</span><span>K</span></span></span><span class="b-tag">криворізький завод металевих конструкцій</span></span>
       <span>© 2026 SCMA KZMK. Криворізький завод металевих конструкцій</span>
-      <span>Частина групи SCMA</span>
     </div>
   </footer>
 </section>
