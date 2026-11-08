@@ -1,0 +1,964 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>SCMA KZMK — Криворізький завод металевих конструкцій</title>
+<meta name="description" content="Проєктування, виготовлення та монтаж металоконструкцій у Кривому Розі: каркаси ангарів і цехів, ферми, балки, резервуари, конвеєрні галереї. Група SCMA, понад 50 років у промисловості.">
+<!--
+  ДЕМО-ВЕРСІЯ ДЛЯ ПОКАЗУ ЗАМОВНИКУ.
+  Позначки data-ph у розмітці = умовні цифри/тексти, які треба підтвердити у замовника:
+  потужність т/міс, макс. проліт, довжина елементів, ISO 9001, EN 1090, Tekla, строк розрахунку,
+  підписи проєктів у слайдері, назви документів для тендерів.
+  Фото: власні фото цеху SCMA (own-*.jpg, titan-*.jpg) + тимчасові фото з сайтів-референсів (решта) — замінити перед публікацією.
+-->
+<style>
+@font-face{font-family:"Tektur";src:url("assets/fonts/Tektur.ttf") format("truetype");font-weight:400 900;font-stretch:75% 100%;font-display:swap}
+@font-face{font-family:"ZenDots";src:url("assets/fonts/ZenDots.ttf") format("truetype");font-weight:400;font-display:block}
+
+:root{
+  --bg:#08090F;          /* сторінка */
+  --ink:#0D0E20;         /* темний фіолетовий (Блінов) */
+  --navy:#1B1C3B;        /* синя панель */
+  --yellow:#FFD423;      /* акцент */
+  --blue:#2E6BE6;        /* другий акцент, мінімально */
+  --white:#F7F7F7;
+  --steel:#8C90A8;       /* другорядний текст */
+  --line:rgba(247,247,247,.12);
+  --line-strong:rgba(247,247,247,.28);
+  --c:14px;              /* зріз кута */
+  --pad:clamp(20px,4.2vw,72px);
+  --head:84px;
+  --ease:cubic-bezier(.77,0,.18,1);
+  --ease-out:cubic-bezier(.16,1,.3,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--white);font-family:"Tektur",system-ui,sans-serif;font-variation-settings:"wdth" 100;font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+img,video,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button,input,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--yellow);outline-offset:3px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ---------- type ---------- */
+.display,.h2,.h3,.btn,.num,.tag{font-family:"Tektur",sans-serif;font-variation-settings:"wdth" 75}
+.display{font-weight:700;text-transform:uppercase;line-height:.88;letter-spacing:-.005em;font-size:clamp(34px,min(9.4vw,17vh),160px)}
+.h2{font-weight:700;text-transform:uppercase;line-height:.92;font-size:clamp(36px,min(4.8vw,9vh),84px)}
+.h3{font-weight:600;text-transform:uppercase;line-height:1.05;font-size:clamp(19px,1.5vw,24px);letter-spacing:.01em}
+.lead{font-size:clamp(16px,1.25vw,19px);line-height:1.55;color:rgba(247,247,247,.82);max-width:56ch}
+.small{font-size:14px;color:var(--steel)}
+.num{font-weight:700;line-height:.9}
+
+/* ---------- buttons ---------- */
+.btn{--h:52px;display:inline-flex;align-items:center;justify-content:center;gap:12px;height:var(--h);padding:0 26px;font-weight:600;font-size:17px;letter-spacing:.04em;text-transform:uppercase;cursor:pointer;border:0;
+  clip-path:polygon(10px 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%,0 10px);transition:background .25s,color .25s,transform .25s var(--ease-out)}
+.btn-y{background:var(--yellow);color:var(--ink)}
+.btn-y:hover{background:var(--white)}
+.btn-o{background:rgba(247,247,247,.08);color:var(--white);box-shadow:inset 0 0 0 1px var(--line-strong)}
+.btn-o:hover{background:rgba(247,247,247,.16)}
+.btn:active{transform:translateY(1px)}
+.btn svg{width:18px;height:18px}
+
+/* ---------- chamfer frames ---------- */
+.cham{position:relative;clip-path:polygon(var(--c) 0,calc(100% - var(--c)) 0,100% var(--c),100% calc(100% - var(--c)),calc(100% - var(--c)) 100%,var(--c) 100%,0 calc(100% - var(--c)),0 var(--c))}
+.cham-line{background:var(--line-strong)}
+.cham-line>.cham-in{position:absolute;inset:1px;background:var(--bg);clip-path:inherit}
+.ua-line{height:2px;background:linear-gradient(90deg,var(--blue) 0 50%,var(--yellow) 50% 100%)}
+
+/* ---------- live logo (Zen Dots + Tektur tagline) ---------- */
+.brand{display:inline-flex;flex-direction:column;line-height:1;color:var(--white);font-size:34px}
+.b-row{display:flex;align-items:flex-start;font-family:"ZenDots",sans-serif;white-space:nowrap}
+.b-word,.b-sup{display:flex}
+.b-word>span,.b-sup>span{display:inline-block}
+.b-sup{font-size:.3em;margin-top:.27em;margin-left:.07em;letter-spacing:.03em}
+.b-tag{display:block;width:max-content;font-family:"Tektur",sans-serif;font-variation-settings:"wdth" 100;font-weight:400;white-space:nowrap;line-height:1.15;font-size:.19em;margin-top:-.05em}
+.top .brand{font-size:40px}
+footer .brand{font-size:24px;opacity:.9}
+
+/* ---------- header ---------- */
+.top{position:fixed;inset:0 0 auto 0;z-index:50;height:var(--head);display:flex;align-items:center;gap:32px;padding:0 var(--pad);
+  transition:background .5s,backdrop-filter .5s}
+.top.solid{background:rgba(8,9,15,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 1px 0 var(--line)}
+.nav{display:flex;gap:clamp(14px,1.7vw,28px);margin-left:auto}
+.nav a,.btn,.top-phone{white-space:nowrap}
+@media (max-width:1320px){.top-phone{display:none}}
+.nav a{font-size:15px;color:rgba(247,247,247,.78);position:relative;padding:6px 0;transition:color .2s}
+.nav a::after{content:"";position:absolute;left:0;right:100%;bottom:0;height:2px;background:var(--yellow);transition:right .35s var(--ease-out)}
+.nav a:hover,.nav a.on{color:var(--white)}
+.nav a.on::after,.nav a:hover::after{right:0}
+.top-phone{font-family:"Tektur";font-variation-settings:"wdth" 75;font-size:20px;font-weight:600;letter-spacing:.02em;white-space:nowrap}
+.top .btn{--h:42px;font-size:15px;padding:0 18px}
+.burger{display:none;margin-left:auto;width:44px;height:44px;background:none;border:0;cursor:pointer;position:relative}
+.burger span{position:absolute;left:10px;right:10px;height:2px;background:var(--white);transition:transform .3s,opacity .3s}
+.burger span:nth-child(1){top:15px}.burger span:nth-child(2){top:21px}.burger span:nth-child(3){top:27px}
+.menu-open .burger span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.menu-open .burger span:nth-child(2){opacity:0}
+.menu-open .burger span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+
+/* ---------- side index (fullpage) ---------- */
+.index{position:fixed;right:16px;top:50%;transform:translateY(-50%);z-index:40;display:flex;flex-direction:column;align-items:flex-end;gap:6px}
+.index button{display:flex;align-items:center;gap:10px;background:none;border:0;cursor:pointer;padding:5px 0;color:var(--steel)}
+.index .lbl{font-size:13px;opacity:0;transform:translateX(8px);transition:opacity .3s,transform .3s var(--ease-out);white-space:nowrap;background:rgba(8,9,15,.85);padding:2px 8px}
+.index .bar{width:12px;height:2px;background:var(--line-strong);transition:width .4s var(--ease-out),background .3s}
+.index:hover .lbl{opacity:.7;transform:none}
+.index button:hover .lbl{opacity:1}
+.index button.on{color:var(--white)}
+.index button.on .bar{width:26px;background:var(--yellow)}
+.counter{position:fixed;right:16px;bottom:22px;z-index:40;font-family:"Tektur";font-variation-settings:"wdth" 75;font-size:15px;color:var(--steel);letter-spacing:.06em}
+.counter b{color:var(--white);font-size:22px;font-weight:600}
+
+/* ---------- back to top ---------- */
+.totop{position:fixed;right:10px;bottom:54px;z-index:45;width:44px;height:44px;display:flex;align-items:center;justify-content:center;cursor:pointer;border:0;
+  color:var(--white);background:var(--line-strong);clip-path:polygon(12px 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%,0 12px);
+  opacity:0;transform:translateY(16px);pointer-events:none;transition:opacity .4s,transform .5s var(--ease-out)}
+.totop::before{content:"";position:absolute;inset:1px;background:rgba(8,9,15,.88);clip-path:inherit;transition:background .3s}
+.totop svg{position:relative;width:22px;height:22px;transition:transform .4s var(--ease-out)}
+.totop.show{opacity:1;transform:none;pointer-events:auto}
+.totop:hover{background:var(--yellow);color:var(--ink)}
+.totop:hover::before{background:var(--yellow)}
+.totop:hover svg{transform:translateY(-3px)}
+@media (max-width:1023px){.totop{bottom:20px;right:16px;width:48px;height:48px}}
+
+/* ---------- edge arrows: appear when the cursor approaches top/bottom edge ---------- */
+.edge{position:fixed;left:50%;z-index:44;width:56px;height:44px;display:flex;align-items:center;justify-content:center;cursor:pointer;border:0;
+  color:var(--white);background:var(--line-strong);clip-path:polygon(12px 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%,0 12px);
+  opacity:0;pointer-events:none;transition:opacity .35s,transform .45s var(--ease-out),background .3s,color .3s}
+.edge::before{content:"";position:absolute;inset:1px;background:rgba(8,9,15,.88);clip-path:inherit;transition:background .3s}
+.edge svg{position:relative;width:22px;height:22px}
+.edge-down{bottom:20px;transform:translate(-50%,14px)}
+.edge-up{top:calc(var(--head) + 14px);transform:translate(-50%,-14px)}
+.edge.show{opacity:1;pointer-events:auto;transform:translate(-50%,0)}
+.edge.show.edge-down svg{animation:nudgeDown 1.4s ease-in-out infinite}
+.edge.show.edge-up svg{animation:nudgeUp 1.4s ease-in-out infinite}
+@keyframes nudgeDown{0%,100%{transform:none}50%{transform:translateY(3px)}}
+@keyframes nudgeUp{0%,100%{transform:none}50%{transform:translateY(-3px)}}
+.edge:hover{background:var(--yellow);color:var(--ink)}
+.edge:hover::before{background:var(--yellow)}
+body.edge-low .hero .cue{opacity:0}
+.hero .cue{transition:opacity .3s}
+@media (max-width:1023px){.edge{display:none}}
+
+/* ---------- deck / slides ---------- */
+.fp body,html.fp{overflow:hidden;height:100%}
+.fp .deck{position:fixed;inset:0;transition:transform .85s var(--ease);will-change:transform}
+.slide{position:relative;min-height:100vh;min-height:100svh;padding:calc(var(--head) + 40px) var(--pad) 64px;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
+.fp .slide{height:100vh;height:100dvh;min-height:0}
+.fp .slide>.wrap{transition:transform .85s var(--ease),opacity .7s}
+.fp .slide.before>.wrap{transform:translateY(-8vh);opacity:.25}
+.fp .slide.after>.wrap{transform:translateY(8vh);opacity:.25}
+.wrap{width:100%;max-width:1480px;margin:0 auto;position:relative}
+.h2+.lead{margin-top:clamp(14px,2.2vh,24px)}
+.sec-name{display:flex;align-items:center;gap:14px;font-size:14px;color:var(--steel);margin-bottom:22px}
+.sec-name i{font-style:normal;font-family:"Tektur";font-variation-settings:"wdth" 75;color:var(--yellow);font-size:16px;font-weight:600}
+.sec-name::after{content:"";height:1px;width:48px;background:var(--line-strong)}
+
+/* reveal helpers (triggered by .is-active / .seen) */
+.rv{opacity:0;transform:translateY(26px);transition:opacity .9s var(--ease-out),transform .9s var(--ease-out)}
+.seen .rv{opacity:1;transform:none}
+.seen .rv.d1{transition-delay:.12s}.seen .rv.d2{transition-delay:.22s}.seen .rv.d3{transition-delay:.32s}.seen .rv.d4{transition-delay:.42s}.seen .rv.d5{transition-delay:.52s}
+
+/* ---------- 1. hero ---------- */
+.hero{padding-top:var(--head);text-align:center;isolation:isolate}
+.hero video,.hero .poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-3}
+.hero .shade{position:absolute;inset:0;z-index:-2;background:
+  radial-gradient(ellipse 70% 60% at 50% 48%,rgba(8,9,15,.35),rgba(8,9,15,.86) 75%),
+  linear-gradient(180deg,rgba(8,9,15,.7),rgba(8,9,15,.2) 30%,rgba(8,9,15,.25) 70%,rgba(8,9,15,1))}
+.hero .grid{position:absolute;inset:0;z-index:-1;opacity:.5;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:calc((100vw - 2*var(--pad))/12) calc((100vw - 2*var(--pad))/12);background-position:var(--pad) var(--pad);mask-image:radial-gradient(ellipse 60% 60% at 50% 50%,#000,transparent 80%);-webkit-mask-image:radial-gradient(ellipse 60% 60% at 50% 50%,#000,transparent 80%)}
+.brand-hero{font-size:clamp(64px,min(15vw,27vh),250px)}
+.brand-hero .b-word>span{opacity:0;transform:translateY(.22em) scale(.96);filter:blur(12px);transition:opacity .8s,transform 1.1s var(--ease-out),filter .9s}
+.brand-hero .b-word>span:nth-child(1){transition-delay:.15s}.brand-hero .b-word>span:nth-child(2){transition-delay:.27s}
+.brand-hero .b-word>span:nth-child(3){transition-delay:.39s}.brand-hero .b-word>span:nth-child(4){transition-delay:.51s}
+.brand-hero .b-sup>span{opacity:0;transform:translateX(-.7em);transition:opacity .5s,transform .8s var(--ease-out)}
+.brand-hero .b-sup>span:nth-child(1){transition-delay:.85s}.brand-hero .b-sup>span:nth-child(2){transition-delay:.92s}
+.brand-hero .b-sup>span:nth-child(3){transition-delay:.99s}.brand-hero .b-sup>span:nth-child(4){transition-delay:1.06s}
+.brand-hero .b-tag{clip-path:inset(0 100% 0 0);transition:clip-path 1.2s var(--ease) 1.2s}
+.hero.seen .brand-hero .b-word>span,.hero.seen .brand-hero .b-sup>span{opacity:1;transform:none;filter:none}
+.hero.seen .brand-hero .b-tag{clip-path:inset(0 0 0 0)}
+.hero .flash{position:absolute;left:50%;top:44%;width:min(80vw,1100px);aspect-ratio:2/1;transform:translate(-50%,-50%);z-index:-1;pointer-events:none;opacity:0;
+  background:radial-gradient(closest-side,rgba(190,215,255,.32),rgba(46,107,230,.14) 45%,transparent 72%)}
+.hero.seen .flash{animation:flash 1.8s .35s ease-out both}
+@keyframes flash{0%{opacity:0}12%{opacity:1}35%{opacity:.55}100%{opacity:0}}
+.hero .lead{margin:clamp(22px,4vh,40px) auto 0;text-align:center}
+.hero .ctas{display:flex;gap:14px;justify-content:center;margin-top:36px;flex-wrap:wrap}
+.hero-foot{position:absolute;left:var(--pad);right:var(--pad);bottom:26px;display:flex;justify-content:space-between;align-items:flex-end;gap:20px;font-size:14px;color:var(--steel)}
+.hero-foot .ua-line{position:absolute;left:0;right:0;top:-18px;opacity:.9;transform-origin:left;transform:scaleX(0);transition:transform 1.6s var(--ease) .5s}
+.hero.seen .hero-foot .ua-line{transform:scaleX(1)}
+.hero-foot .cue{display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--white);position:absolute;left:50%;transform:translateX(-50%);bottom:0}
+.cue .mouse{width:22px;height:34px;border:1.5px solid var(--line-strong);border-radius:12px;position:relative}
+.cue .mouse::after{content:"";position:absolute;left:50%;top:7px;width:2px;height:7px;margin-left:-1px;background:var(--yellow);animation:wheel 1.8s infinite}
+@keyframes wheel{0%{opacity:0;transform:translateY(-3px)}30%{opacity:1}100%{opacity:0;transform:translateY(9px)}}
+.hero-foot .r{text-align:right}
+
+/* ---------- 2. about ---------- */
+.about .wrap{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(32px,5vw,96px);align-items:stretch}
+.about .wrap>div:first-child{display:flex;flex-direction:column}
+.about .stats{align-self:stretch;grid-auto-rows:1fr}
+.about .h2{margin-bottom:clamp(16px,2.6vh,28px);max-width:18ch}
+.about .lead+.lead{margin-top:12px}
+.about .photo{margin-top:clamp(18px,3vh,30px);flex:1 1 auto;min-height:clamp(130px,23vh,250px);overflow:hidden}
+.about .photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%;filter:contrast(1.05)}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.stat{padding:clamp(18px,2.4vh,30px) 26px;min-height:clamp(118px,15.5vh,160px);display:flex;flex-direction:column;justify-content:space-between}
+.stat .num{font-size:clamp(46px,5vw,78px);position:relative}
+.stat .num sup{font-size:.45em;vertical-align:top;margin-left:2px;color:var(--yellow)}
+.stat p{font-size:14px;color:var(--steel);position:relative;margin-top:8px;max-width:24ch}
+.stat.hl{background:var(--yellow);color:var(--ink)}
+.stat.hl p{color:rgba(13,14,32,.75)}
+.stat.hl .num sup{color:var(--ink)}
+/* живість: вхід, скан-лінія, інверсія при наведенні */
+.stats{position:relative;perspective:1100px}
+.about .stat.rv{transform:rotateX(-78deg) translateY(10px);transform-origin:50% 0;transition:opacity .6s,transform 1s var(--ease-out),background .35s,color .35s}
+.about.seen .stat.rv{transform:none}
+.about.seen .stat:nth-child(1){transition-delay:.3s,.3s,0s,0s}.about.seen .stat:nth-child(2){transition-delay:.42s,.42s,0s,0s}
+.about.seen .stat:nth-child(3){transition-delay:.65s,.65s,0s,0s}.about.seen .stat:nth-child(4){transition-delay:.77s,.77s,0s,0s}
+.about.seen .stat:nth-child(5){transition-delay:1s,1s,0s,0s}.about.seen .stat:nth-child(6){transition-delay:1.12s,1.12s,0s,0s}
+.stat.cham-line{cursor:default;background:radial-gradient(200px circle at var(--x,50%) var(--y,-300px),rgba(255,212,35,.95),var(--line-strong) 75%)}
+.stat .cham-in{transition:background .35s}
+.stat .num,.stat p{transition:color .35s,transform .45s var(--ease-out)}
+.stat .num sup{transition:color .35s}
+.stat.cham-line:hover,.stat.cham-line:hover>.cham-in{background:var(--yellow)}
+.stat.cham-line:hover{color:var(--ink)}
+.stat.cham-line:hover p{color:rgba(13,14,32,.78)}
+.stat.cham-line:hover .num sup{color:var(--ink)}
+.stat.hl:hover{background:var(--navy);color:var(--white)}
+.stat.hl:hover p{color:rgba(247,247,247,.75)}
+.stat.hl:hover .num sup{color:var(--yellow)}
+.stat:hover .num{transform:translateY(-4px)}
+.about .photo{position:relative}
+/* фото віддзеркалене у файлі (own-weld-flip.jpg); точка віддалення та зсув теж дзеркальні */
+.about .photo img{transform:scale(2);transform-origin:48.3% 59.6%;transition:transform 6.5s cubic-bezier(.25,.6,.3,1) .15s}
+.about.seen .photo img{transform:scale(1);animation:photoFloat 11s ease-in-out 6.6s infinite}
+/* після віддалення: ледь помітне "дихання" (окремі властивості scale/translate не конфліктують з transform) */
+@keyframes photoFloat{0%,100%{scale:1;translate:0 0}50%{scale:1.04;translate:-1% .6%}}
+.about .photo::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:
+  linear-gradient(90deg,rgba(8,9,15,.97) 0%,rgba(8,9,15,.6) 14%,rgba(8,9,15,0) 34%,rgba(8,9,15,0) 66%,rgba(8,9,15,.6) 86%,rgba(8,9,15,.97) 100%),
+  linear-gradient(0deg,rgba(8,9,15,.7) 0%,rgba(8,9,15,0) 45%),
+  radial-gradient(120% 140% at 50% 50%,transparent 55%,rgba(8,9,15,.45) 100%)}
+.about .photo .tagc{position:absolute;left:16px;bottom:12px;z-index:1;font-size:13px;color:rgba(247,247,247,.85);display:flex;align-items:center;gap:10px}
+.about .photo .tagc::before{content:"";width:22px;height:2px;background:var(--yellow)}
+.about .photo::after{content:"";position:absolute;inset:0;z-index:2;background:var(--yellow);transform-origin:right;transition:transform .9s var(--ease) .25s}
+.about.seen .photo::after{transform:scaleX(0)}
+/* заголовки по словах */
+.h2.rv{opacity:1;transform:none}
+.h2 .w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.08em;margin-bottom:-.08em}
+.h2 .w>span{display:inline-block;transform:translateY(108%);transition:transform .95s var(--ease-out);transition-delay:var(--d,0s)}
+.seen .h2 .w>span{transform:none}
+/* скидання анімацій без зворотного руху */
+.noanim,.noanim *,.noanim *::before,.noanim *::after,.noanim::after{transition:none!important;animation:none!important}
+
+/* ---------- 3. products ---------- */
+.products .head{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;margin-bottom:clamp(20px,3.4vh,40px)}
+.products .head .lead{max-width:44ch}
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.tile{position:relative;background:var(--ink);height:clamp(190px,27vh,300px);padding:18px 20px;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;cursor:pointer;
+  box-shadow:inset 0 0 0 1px var(--line)}
+.tile .art{position:absolute;inset:14px 14px 70px;display:flex;align-items:center;justify-content:center;transition:opacity .45s,transform .7s var(--ease-out)}
+.tile .art svg{width:100%;height:100%;overflow:visible}
+.tile .art path{fill:none;stroke:var(--yellow);stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1 1;stroke-dashoffset:1}
+.seen .tile .art path{stroke-dashoffset:0;transition:stroke-dashoffset 2.4s cubic-bezier(.45,.05,.25,1)}
+.tile .ph{position:absolute;inset:0;opacity:0;transition:opacity .5s,transform 1.2s var(--ease-out);transform:scale(1.06)}
+.tile .ph img{width:100%;height:100%;object-fit:cover}
+.tile .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,14,32,.1),rgba(13,14,32,.92))}
+.tile .h3,.tile p{position:relative;z-index:1}
+.tile p{font-size:13.5px;line-height:1.45;color:var(--steel);max-height:0;opacity:0;overflow:hidden;transition:max-height .5s var(--ease-out),opacity .4s,margin .4s}
+.tile:hover .ph,.tile:focus-visible .ph{opacity:1;transform:none}
+.tile:hover .art,.tile:focus-visible .art{opacity:0;transform:scale(.94)}
+.tile:hover p,.tile:focus-visible p{max-height:80px;opacity:1;margin-top:8px;color:rgba(247,247,247,.85)}
+.tile.y{background:var(--yellow);color:var(--ink);box-shadow:none}
+.tile.y .art path{stroke:var(--ink)}
+.tile.y p{color:rgba(13,14,32,.8)}
+.tile.y:hover p{color:var(--white)}
+.tile.y:hover .h3{color:var(--white)}
+.tile.cta{background:var(--navy);justify-content:space-between;cursor:default}
+.tile.cta .h3{font-size:clamp(22px,1.9vw,30px)}
+.tile.cta p{max-height:none;opacity:1;color:rgba(247,247,247,.75);margin-top:10px}
+.tile.cta .btn{--h:44px;font-size:15px;align-self:flex-start;position:relative;z-index:1}
+
+/* ---------- 4. cycle ---------- */
+.cycle{isolation:isolate}
+.cycle .bgs{position:absolute;inset:0;z-index:-2}
+.cycle .bgs img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.05);transition:opacity 1s,transform 6s linear;filter:grayscale(.4)}
+.cycle .bgs img.on{opacity:1;transform:scale(1)}
+.cycle::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(8,9,15,.96) 0%,rgba(8,9,15,.8) 50%,rgba(8,9,15,.62)),linear-gradient(0deg,rgba(8,9,15,1),transparent 50%)}
+.cycle .h2{max-width:17ch}
+.cycle .lead{margin-top:20px}
+.steps{display:grid;grid-template-columns:repeat(5,1fr);margin-top:clamp(32px,6vh,72px);border-top:1px solid var(--line-strong)}
+.step{position:relative;padding:22px 22px 0 0;background:none;border:0;text-align:left;cursor:pointer;color:inherit}
+.step::before{content:"";position:absolute;left:0;top:-1px;height:3px;width:0;background:var(--yellow);transition:width .6s var(--ease-out)}
+.step.on::before{width:100%}
+.step .n{font-family:"Tektur";font-variation-settings:"wdth" 75;font-size:15px;color:var(--steel);display:block;margin-bottom:10px;transition:color .3s}
+.step.on .n{color:var(--yellow)}
+.step .h3{opacity:.6;transition:opacity .3s}
+.step.on .h3,.step:hover .h3{opacity:1}
+.step p{font-size:14px;color:rgba(247,247,247,.72);margin-top:10px;max-width:30ch;opacity:.55;transition:opacity .3s}
+.step.on p{opacity:1}
+
+/* ---------- 5. production ---------- */
+.prod .wrap{display:grid;grid-template-columns:1.15fr 1fr;gap:clamp(28px,4vw,80px);align-items:center}
+.mosaic{display:grid;grid-template-columns:1.4fr 1fr;grid-template-rows:1fr 1fr;gap:10px;height:min(60vh,620px)}
+.eq{margin-top:clamp(14px,2.6vh,26px)}
+.mosaic figure{position:relative;overflow:hidden;background:var(--ink)}
+.mosaic figure:first-child{grid-row:1/3}
+.mosaic img{width:100%;height:100%;object-fit:cover;transition:transform 1.4s var(--ease-out)}
+.mosaic figure:hover img{transform:scale(1.04)}
+.mosaic figcaption{position:absolute;left:12px;bottom:10px;font-size:12.5px;color:var(--white);background:rgba(8,9,15,.7);padding:4px 9px;backdrop-filter:blur(6px)}
+.eq{margin-top:26px;border-top:1px solid var(--line)}
+.eq li{list-style:none;display:grid;grid-template-columns:1fr auto;gap:20px;align-items:baseline;padding:clamp(8px,1.5vh,14px) 0;border-bottom:1px solid var(--line)}
+.eq .what{font-weight:500}
+.eq .what small{display:block;font-size:13px;color:var(--steel);font-weight:400;margin-top:2px}
+.eq .val{font-family:"Tektur";font-variation-settings:"wdth" 75;font-size:22px;font-weight:600;color:var(--yellow);white-space:nowrap}
+
+/* ---------- 6. industries ---------- */
+.ind .head{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;margin-bottom:clamp(20px,3.5vh,40px)}
+.acc{display:flex;gap:8px;height:min(58vh,560px)}
+.acc .panel{position:relative;flex:1;min-width:0;overflow:hidden;cursor:pointer;transition:flex 1s var(--ease);background:var(--ink)}
+.acc .panel.on{flex:4.2}
+.acc img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1) brightness(.55);transition:filter 1s,transform 1.4s var(--ease-out);transform:scale(1.08)}
+.acc .panel.on img{filter:grayscale(.15) brightness(.75);transform:scale(1)}
+.acc .panel::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(8,9,15,.92))}
+.acc .cap{position:absolute;left:22px;right:22px;bottom:22px;z-index:1}
+.acc .cap .h3{white-space:nowrap;transform-origin:left bottom;transition:transform .8s var(--ease)}
+.acc .panel:not(.on) .cap .h3{transform:rotate(-90deg) translateY(100%);position:absolute;left:0;bottom:0;white-space:nowrap}
+.acc .cap p{font-size:14.5px;color:rgba(247,247,247,.85);margin-top:10px;max-width:48ch;opacity:0;transform:translateY(10px);transition:opacity .5s,transform .6s var(--ease-out)}
+.acc .panel.on .cap p{opacity:1;transform:none;transition-delay:.35s}
+.acc .panel .tick{position:absolute;top:18px;left:22px;z-index:1;font-family:"Tektur";font-variation-settings:"wdth" 75;color:var(--yellow);font-size:15px}
+
+/* ---------- 7. projects ---------- */
+.proj .head{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;margin-bottom:clamp(20px,3.4vh,36px)}
+.arrows{display:flex;align-items:center;gap:18px}
+.arrows button{width:52px;height:52px;background:none;border:0;cursor:pointer;color:var(--white);display:flex;align-items:center;justify-content:center;box-shadow:inset 0 0 0 1px var(--line-strong);clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px);transition:background .25s,color .25s}
+.arrows button:hover{background:var(--yellow);color:var(--ink)}
+.arrows svg{width:22px;height:22px}
+.arrows .pg{font-family:"Tektur";font-variation-settings:"wdth" 75;font-size:16px;color:var(--steel);min-width:64px;text-align:center}
+.arrows .pg b{color:var(--white);font-size:24px;font-weight:600}
+.track-wrap{overflow:hidden;margin-right:calc(-1 * var(--pad))}
+.track{display:flex;gap:12px;transition:transform .9s var(--ease)}
+.card{flex:0 0 clamp(280px,30vw,480px);height:min(56vh,540px);position:relative;overflow:hidden;background:var(--ink)}
+.card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.4s var(--ease-out)}
+.card:hover img{transform:scale(1.05)}
+.card::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,9,15,.72),transparent 32%,transparent 55%,rgba(8,9,15,.94))}
+.card .top-c,.card .bot-c{position:absolute;left:22px;right:22px;z-index:1}
+.card .top-c{top:20px}
+.card .top-c .small{color:rgba(247,247,247,.7)}
+.card .top-c .h3{margin-top:6px;font-size:clamp(20px,1.7vw,27px)}
+.card .bot-c{bottom:20px;display:flex;gap:26px}
+.card .bot-c div{font-size:13px;color:rgba(247,247,247,.7)}
+.card .bot-c b{display:block;font-family:"Tektur";font-variation-settings:"wdth" 75;font-size:24px;color:var(--white);font-weight:600}
+
+/* ---------- 8. clients ---------- */
+.clients .wrap{display:grid;grid-template-columns:.9fr 1.3fr;gap:clamp(30px,5vw,90px);align-items:center}
+.logos{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.logo-t{height:clamp(92px,13vh,128px);display:flex;align-items:center;justify-content:center;padding:18px 22px}
+.logo-t .cham-in{display:flex;align-items:center;justify-content:center;padding:10px 14px;transition:background .35s}
+.logo-t img{max-width:84%;max-height:80%;width:auto;height:auto;opacity:.88;transition:opacity .3s,transform .5s var(--ease-out);position:relative}
+.logo-t:hover .cham-in{background:var(--navy)}
+.logo-t:hover img{opacity:1;transform:scale(1.04)}
+.quote{margin-top:30px;padding-left:22px;border-left:2px solid var(--yellow);font-size:clamp(16px,1.25vw,19px);color:rgba(247,247,247,.85);max-width:46ch}
+
+/* ---------- 9. tenders ---------- */
+.tender .wrap{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,90px);align-items:start}
+.docs{border-top:1px solid var(--line)}
+.docs li{list-style:none;display:flex;gap:18px;align-items:flex-start;padding:16px 0;border-bottom:1px solid var(--line)}
+.docs svg{flex:0 0 22px;width:22px;height:22px;color:var(--yellow);margin-top:2px}
+.docs b{font-weight:600;display:block}
+.docs span{font-size:14px;color:var(--steel)}
+.tender .ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+.titan{margin-top:34px;display:grid;grid-template-columns:150px 1fr;gap:20px;align-items:center;padding:16px;background:var(--navy)}
+.titan img{width:150px;height:100px;object-fit:cover}
+.titan .small{color:rgba(247,247,247,.7)}
+.titan a{color:var(--yellow);font-weight:500;display:inline-block;margin-top:6px;border-bottom:1px solid rgba(255,212,35,.4)}
+.titan a:hover{border-color:var(--yellow)}
+
+/* ---------- 10. contact ---------- */
+.contact{justify-content:space-between;padding-bottom:0}
+.contact .wrap{display:grid;grid-template-columns:1fr 1.1fr;gap:clamp(30px,5vw,90px);align-items:start;margin-top:auto;margin-bottom:auto}
+.c-list{margin-top:30px;display:grid;gap:20px}
+.c-list .small{display:block;margin-bottom:3px}
+.c-list a,.c-list p{font-size:clamp(17px,1.35vw,21px)}
+.c-list .big{font-family:"Tektur";font-variation-settings:"wdth" 75;font-size:clamp(30px,2.6vw,42px);font-weight:600;letter-spacing:.01em;line-height:1.1}
+.c-list a:hover{color:var(--yellow)}
+form{padding:clamp(22px,3vw,40px);background:var(--ink);box-shadow:inset 0 0 0 1px var(--line)}
+form .h3{margin-bottom:6px}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:22px}
+.field{display:flex;flex-direction:column;gap:6px}
+.field.full{grid-column:1/-1}
+.field label{font-size:13px;color:var(--steel)}
+.field input,.field textarea{background:transparent;border:0;border-bottom:1px solid var(--line-strong);padding:9px 0;font-size:16px;outline:none;transition:border-color .25s}
+.field textarea{resize:none;height:64px}
+.field input:focus,.field textarea:focus{border-color:var(--yellow)}
+.field input:user-invalid{border-color:#FF6B5B}
+.file{display:flex;align-items:center;gap:14px;padding:14px;cursor:pointer;box-shadow:inset 0 0 0 1px dashed;border:1px dashed var(--line-strong);transition:border-color .25s,background .25s}
+.file:hover{border-color:var(--yellow);background:rgba(255,212,35,.05)}
+.file svg{width:26px;height:26px;color:var(--yellow);flex:0 0 26px}
+.file .t{font-size:14.5px}
+.file .t small{display:block;color:var(--steel);font-size:12.5px}
+.f-foot{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:22px;flex-wrap:wrap}
+.f-foot .small{max-width:30ch;font-size:12.5px}
+.ok{display:none;margin-top:18px;padding:14px 16px;background:rgba(255,212,35,.1);border-left:2px solid var(--yellow);font-size:15px}
+form.sent .ok{display:block}
+footer{width:100%;margin-top:clamp(20px,3vh,40px)}
+.f-row{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:20px 0 22px;font-size:13.5px;color:var(--steel);max-width:1480px;margin:0 auto;flex-wrap:wrap}
+.f-row img{height:26px;width:auto;opacity:.9}
+
+/* ---------- mobile / normal scroll ---------- */
+@media (max-width:1180px){
+  .nav{display:none}
+  .top-phone{margin-left:auto}
+}
+@media (max-width:1023px){
+  :root{--head:68px}
+  .top .brand{font-size:28px}
+  .index,.counter{display:none}
+  .top .btn,.top-phone{display:none}
+  .burger{display:block}
+  .menu-open .nav{display:flex;position:fixed;inset:var(--head) 0 0 0;flex-direction:column;gap:6px;padding:28px var(--pad);background:rgba(8,9,15,.97);margin:0}
+  .menu-open .nav a{font-family:"Tektur";font-variation-settings:"wdth" 75;font-size:34px;text-transform:uppercase;font-weight:600}
+  .slide{padding-top:calc(var(--head) + 28px);padding-bottom:56px}
+  .hero{min-height:100svh}
+  .hero-foot .l,.hero-foot .r{display:none}
+  .about .wrap,.prod .wrap,.clients .wrap,.tender .wrap,.contact .wrap{grid-template-columns:1fr}
+  .tiles{grid-template-columns:repeat(2,1fr)}
+  .tile{height:220px}
+  .tile p{max-height:none;opacity:1;margin-top:6px}
+  .tile .ph{display:none}
+  .products .head,.ind .head,.proj .head{flex-direction:column;align-items:flex-start;gap:16px}
+  .steps{grid-template-columns:1fr;border-top:0}
+  .step{padding:16px 0 16px 18px;border-left:1px solid var(--line-strong)}
+  .step::before{left:-1px;top:0;width:3px;height:0;transition:height .6s var(--ease-out)}
+  .step.on::before{width:3px;height:100%}
+  .step p,.step .h3{opacity:1}
+  .mosaic{height:auto;grid-template-rows:200px 160px}
+  .acc{flex-direction:column;height:auto}
+  .acc .panel{flex:none;height:76px;transition:height .8s var(--ease)}
+  .acc .panel.on{height:300px;flex:none}
+  .acc .cap{bottom:18px}
+  .acc .panel:not(.on) .cap .h3{transform:none!important;position:static!important}
+  .acc .panel:not(.on) img{filter:grayscale(1) brightness(.4)}
+  .card{flex-basis:82vw;height:420px}
+  .logos{grid-template-columns:repeat(3,1fr)}
+  .fgrid{grid-template-columns:1fr}
+  .contact{padding-bottom:0}
+}
+@media (max-width:560px){
+  .tiles{grid-template-columns:1fr}
+  .stats{grid-template-columns:1fr 1fr}
+  .stat{padding:16px}
+  .logos{grid-template-columns:repeat(2,1fr)}
+  .titan{grid-template-columns:1fr}
+  .titan img{width:100%;height:150px}
+  .hero .ctas .btn{width:100%}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition-duration:.01ms!important;animation:none!important}
+  .rv,.about .stat.rv{opacity:1;transform:none}
+  .h2 .w>span,.about .photo img{transform:none}
+  .about .photo::after{display:none}
+  .tile .art path{stroke-dashoffset:0}
+  .brand-hero .b-word>span,.brand-hero .b-sup>span{opacity:1;transform:none;filter:none}
+  .brand-hero .b-tag{clip-path:none}
+}
+</style>
+</head>
+<body>
+<a class="sr" href="#contact">Перейти до форми заявки</a>
+
+<header class="top" id="top">
+  <a class="logo" href="#hero" data-go="0" aria-label="SCMA KZMK — Криворізький завод металевих конструкцій, на початок"><span class="brand" aria-hidden="true"><span class="b-row"><span class="b-word"><span>S</span><span>C</span><span>M</span><span>A</span></span><span class="b-sup"><span>K</span><span>Z</span><span>M</span><span>K</span></span></span><span class="b-tag">криворізький завод металевих конструкцій</span></span></a>
+  <nav class="nav" aria-label="Розділи">
+    <a href="#hero" data-go="0">Головна</a>
+    <a href="#about" data-go="1">Про нас</a>
+    <a href="#products" data-go="2">Продукція</a>
+    <a href="#production" data-go="4">Виробництво</a>
+    <a href="#projects" data-go="6">Проєкти</a>
+    <a href="#tenders" data-go="8">Тендерам</a>
+    <a href="#contact" data-go="9">Контакти</a>
+  </nav>
+  <a class="top-phone" href="tel:+380676326798">+38 (067) 632-67-98</a>
+  <a class="btn btn-y" href="#contact" data-go="9">Розрахувати проєкт</a>
+  <button class="burger" aria-label="Меню" aria-expanded="false"><span></span><span></span><span></span></button>
+</header>
+
+<div class="index" aria-label="Навігація по екранах"></div>
+<div class="counter" aria-hidden="true"><b>01</b> / 10</div>
+<button class="edge edge-up" type="button" aria-label="Попередній екран" tabindex="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square"><path d="M5.5 14.5 12 8l6.5 6.5"/></svg></button>
+<button class="edge edge-down" type="button" aria-label="Наступний екран" tabindex="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square"><path d="M5.5 9.5 12 16l6.5-6.5"/></svg></button>
+<button class="totop" type="button" aria-label="Повернутися на початок"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square"><path d="M12 20V5M5.5 11.5 12 5l6.5 6.5"/></svg></button>
+
+<main class="deck" id="deck">
+
+<!-- 1 HERO -->
+<section class="slide hero" id="hero" data-name="Головна">
+  <img class="poster" src="assets/video/hero-poster.jpg" alt="" aria-hidden="true">
+  <video autoplay muted loop playsinline preload="auto" poster="assets/video/hero-poster.jpg" aria-hidden="true"><source src="assets/video/hero.mp4" type="video/mp4"></video>
+  <div class="shade"></div><div class="grid"></div><div class="flash"></div>
+  <div class="wrap">
+    <h1 class="sr">SCMA KZMK — Криворізький завод металевих конструкцій. Металоконструкції для промисловості</h1>
+    <div class="brand brand-hero" aria-hidden="true"><span class="b-row"><span class="b-word"><span>S</span><span>C</span><span>M</span><span>A</span></span><span class="b-sup"><span>K</span><span>Z</span><span>M</span><span>K</span></span></span><span class="b-tag">криворізький завод металевих конструкцій</span></div>
+    <p class="lead rv d4">Проєктуємо, виготовляємо і монтуємо металоконструкції для промисловості: каркаси, ферми, балки, резервуари. Власний цех у Кривому Розі та доставка напівпричепами по всій Україні.</p>
+    <div class="ctas rv d5">
+      <a class="btn btn-y" href="#contact" data-go="9">Надіслати креслення на розрахунок</a>
+      <a class="btn btn-o" href="tel:+380676326798"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>Зателефонувати</a>
+    </div>
+  </div>
+  <div class="hero-foot">
+    <div class="ua-line"></div>
+    <div class="l">вул. Цимлянська, 8Д<br>Кривий Ріг</div>
+    <div class="cue" aria-hidden="true"><div class="mouse"></div></div>
+    <div class="r">Група SCMA<br>понад 50 років у промисловості</div>
+  </div>
+</section>
+
+<!-- 2 ABOUT -->
+<section class="slide about" id="about" data-name="Про завод">
+  <div class="wrap">
+    <div>
+      <div class="sec-name rv"><i>02</i>Про завод</div>
+      <h2 class="h2 rv d1">Новий завод з досвідом пів століття</h2>
+      <p class="lead rv d2">SCMA KZMK — виробництво металоконструкцій у складі групи SCMA. Понад 50 років група будує вагові комплекси та системи автоматизації для гірничо-збагачувальних комбінатів і металургійних заводів Кривбасу.</p>
+      <p class="lead rv d3">Вантажоприймальна платформа ваги — це 22 метри зварної сталі під навантаженням 100 тонн. Тепер ту саму точність ми вкладаємо в каркаси, ферми та конструкції для ваших об'єктів.</p>
+      <div class="photo cham rv d4"><img src="assets/img/own-plasma-wide.jpg" alt="Плазмове різання листа на верстаті з ЧПК у цеху SCMA" loading="lazy"><span class="tagc">Плазмове різання з ЧПК, Кривий Ріг</span></div>
+    </div>
+    <div class="stats">
+      <div class="stat cham cham-line rv d1"><div class="cham-in"></div><span class="num" data-count="50">0<sup>+</sup></span><p>років досвіду групи SCMA</p></div>
+      <div class="stat cham hl rv d2"><span class="num" data-count="1600">0<sup>м²</sup></span><p>виробничих площ з повним циклом</p></div>
+      <div class="stat cham cham-line rv d3"><div class="cham-in"></div><span class="num" data-count="100">0<sup>+</sup></span><p>фахівців: конструктори, зварники, монтажники</p></div>
+      <div class="stat cham cham-line rv d4"><div class="cham-in"></div><span class="num" data-count="300" data-ph>0<sup>т</sup></span><p>металоконструкцій на місяць</p></div>
+      <div class="stat cham cham-line rv d4"><div class="cham-in"></div><span class="num" data-count="15">0</span><p>країн, де працює обладнання SCMA</p></div>
+      <div class="stat cham cham-line rv d5"><div class="cham-in"></div><span class="num" data-count="40">0<sup>+</sup></span><p>запатентованих інженерних розробок</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 3 PRODUCTS -->
+<section class="slide products" id="products" data-name="Продукція">
+  <div class="wrap">
+    <div class="head">
+      <div><div class="sec-name rv"><i>03</i>Продукція</div><h2 class="h2 rv d1">Що ми виготовляємо</h2></div>
+      <p class="lead rv d2">Серійні вироби і конструкції за індивідуальними кресленнями. Працюємо з чорною, оцинкованою та нержавіючою сталлю.</p>
+    </div>
+    <div class="tiles">
+      <article class="tile y rv" tabindex="0"><div class="art" data-art="hangar"></div><div class="ph"><img src="assets/img/p-hangar.jpg" alt="" loading="lazy"></div><h3 class="h3">Каркаси ангарів і цехів</h3><p>Одно- та багатопрольотні каркаси з прольотом до 36 м під сендвіч-панелі або профлист.</p></article>
+      <article class="tile rv d1" tabindex="0"><div class="art" data-art="truss"></div><div class="ph"><img src="assets/img/p-truss.jpg" alt="" loading="lazy"></div><h3 class="h3">Ферми</h3><p>Кроквяні та підкроквяні ферми з профільної труби, кутика і зварних профілів.</p></article>
+      <article class="tile rv d2" tabindex="0"><div class="art" data-art="beam"></div><div class="ph"><img src="assets/img/p-beam.jpg" alt="" loading="lazy"></div><h3 class="h3">Балки та колони</h3><p>Зварні двотаври, колони, ригелі та прогони під розрахункові навантаження.</p></article>
+      <article class="tile rv d3" tabindex="0"><div class="art" data-art="tank"></div><div class="ph"><img src="assets/img/p-tank.jpg" alt="" loading="lazy"></div><h3 class="h3">Резервуари та ємності</h3><p>Вертикальні й горизонтальні резервуари, бункери, силоси для сипких матеріалів.</p></article>
+      <article class="tile rv d2" tabindex="0"><div class="art" data-art="stairs"></div><div class="ph"><img src="assets/img/p-stairs.jpg" alt="" loading="lazy"></div><h3 class="h3">Сходи, площадки, огородження</h3><p>Маршові сходи, площадки обслуговування обладнання та перила.</p></article>
+      <article class="tile rv d3" tabindex="0"><div class="art" data-art="gallery"></div><div class="ph"><img src="assets/img/p-gallery.jpg" alt="" loading="lazy"></div><h3 class="h3">Конвеєрні галереї та естакади</h3><p>Галереї, опори та перехідні мости для ГЗК і збагачувальних фабрик.</p></article>
+      <article class="tile rv d4" tabindex="0"><div class="art" data-art="custom"></div><div class="ph"><img src="assets/img/p-custom.jpg" alt="" loading="lazy"></div><h3 class="h3">Нестандартні вироби</h3><p>Рами, траверси, корпуси та металоконструкції обладнання за вашими кресленнями.</p></article>
+      <div class="tile cta rv d5"><div><h3 class="h3">Немає вашого виробу в списку?</h3><p>Надішліть креслення або ескіз. Розрахуємо вартість і строки за один робочий день.</p></div><a class="btn btn-y" href="#contact" data-go="9">Надіслати креслення</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- 4 CYCLE -->
+<section class="slide cycle" id="cycle" data-name="Повний цикл">
+  <div class="bgs">
+    <img class="on" src="assets/img/own-cnc.jpg" alt="" loading="lazy">
+    <img src="assets/img/own-plasma.jpg" alt="" loading="lazy">
+    <img src="assets/img/c-paint.jpg" alt="" loading="lazy">
+    <img src="assets/img/c-truck.jpg" alt="" loading="lazy">
+    <img src="assets/img/c-mount.jpg" alt="" loading="lazy">
+  </div>
+  <div class="wrap">
+    <div class="sec-name rv"><i>04</i>Як ми працюємо</div>
+    <h2 class="h2 rv d1">Від креслення до змонтованого об'єкта</h2>
+    <p class="lead rv d2">Один підрядник на весь цикл: менше узгоджень, одна відповідальність за строки і якість.</p>
+    <div class="steps" role="tablist">
+      <button class="step on rv d1" role="tab" aria-selected="true"><span class="n">01</span><span class="h3">Проєктування</span><p>Розробляємо креслення КМД за вашим проєктом КМ або проєктуємо з нуля.</p></button>
+      <button class="step rv d2" role="tab" aria-selected="false"><span class="n">02</span><span class="h3">Виготовлення</span><p>Плазмове різання з ЧПК, гнуття, зварювання, контроль ВТК на кожному вузлі.</p></button>
+      <button class="step rv d3" role="tab" aria-selected="false"><span class="n">03</span><span class="h3">Захист і фарбування</span><p>Очищення поверхні, ґрунтування та фарбування. Гаряче цинкування за запитом.</p></button>
+      <button class="step rv d4" role="tab" aria-selected="false"><span class="n">04</span><span class="h3">Доставка</span><p>Власні напівпричепи довозять елементи до 13,6 м на об'єкт у будь-яку область.</p></button>
+      <button class="step rv d5" role="tab" aria-selected="false"><span class="n">05</span><span class="h3">Монтаж</span><p>Штатні монтажні бригади та ліцензія на будівельні роботи. Здаємо об'єкт під ключ.</p></button>
+    </div>
+  </div>
+</section>
+
+<!-- 5 PRODUCTION -->
+<section class="slide prod" id="production" data-name="Виробництво">
+  <div class="wrap">
+    <div class="mosaic rv">
+      <figure><img src="assets/img/own-plasma.jpg" alt="Плазмове різання листа на верстаті з ЧПК" loading="lazy"><figcaption>Плазмове різання з ЧПК</figcaption></figure>
+      <figure><img src="assets/img/own-weld.jpg" alt="Зварювання металоконструкцій у цеху" loading="lazy"><figcaption>Зварювальна дільниця</figcaption></figure>
+      <figure><img src="assets/img/own-press.jpg" alt="Листозгинальний прес" loading="lazy"><figcaption>Листозгинальний прес</figcaption></figure>
+    </div>
+    <div>
+      <div class="sec-name rv"><i>05</i>Виробництво</div>
+      <h2 class="h2 rv d1">Власний цех у Кривому Розі</h2>
+      <p class="lead rv d2">Усі операції виконуємо на власному обладнанні, тому контролюємо і якість, і строки.</p>
+      <ul class="eq">
+        <li class="rv d2"><span class="what">Плазмове різання з ЧПК<small>Hypertherm XPR170, деталі за DXF-файлом</small></span><span class="val" data-ph>до 40 мм</span></li>
+        <li class="rv d3"><span class="what">Листозгинальний прес<small>Ermaksan, гнуття профілів і листових деталей</small></span><span class="val" data-ph>до 3 м</span></li>
+        <li class="rv d3"><span class="what">Напівавтоматичне зварювання<small>MIG/MAG, атестовані зварники</small></span><span class="val" data-ph>12 постів</span></li>
+        <li class="rv d4"><span class="what">Фарбувальна дільниця<small>ґрунт і фарба за вимогами проєкту</small></span><span class="val" data-ph>до 12 м</span></li>
+        <li class="rv d5"><span class="what">Відділ технічного контролю<small>перевірка кожної деталі та вузла</small></span><span class="val">100%</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 6 INDUSTRIES -->
+<section class="slide ind" id="industries" data-name="Галузі">
+  <div class="wrap">
+    <div class="head">
+      <div><div class="sec-name rv"><i>06</i>Галузі</div><h2 class="h2 rv d1">Для кого ми працюємо</h2></div>
+      <p class="lead rv d2">Знаємо вимоги великих промислових замовників: документація, допуски, строки.</p>
+    </div>
+    <div class="acc rv d2">
+      <div class="panel on" tabindex="0"><img src="assets/img/i-gok.jpg" alt="" loading="lazy"><span class="tick">ГЗК</span><div class="cap"><h3 class="h3">Гірництво та збагачення</h3><p>Конвеєрні галереї, естакади, бункери, площадки обслуговування для комбінатів Кривбасу.</p></div></div>
+      <div class="panel" tabindex="0"><img src="assets/img/i-metal.jpg" alt="" loading="lazy"><div class="cap"><h3 class="h3">Металургія</h3><p>Конструкції цехів, опори технологічних трубопроводів, ремонтні металоконструкції.</p></div></div>
+      <div class="panel" tabindex="0"><img src="assets/img/i-energy.jpg" alt="" loading="lazy"><div class="cap"><h3 class="h3">Енергетика</h3><p>Каркаси котелень, опори, сходові клітини та майданчики обслуговування.</p></div></div>
+      <div class="panel" tabindex="0"><img src="assets/img/i-agro.jpg" alt="" loading="lazy"><div class="cap"><h3 class="h3">Агро та елеватори</h3><p>Зерносховища, навіси, ангари для техніки, галереї елеваторів.</p></div></div>
+      <div class="panel" tabindex="0"><img src="assets/img/i-logistic.jpg" alt="" loading="lazy"><div class="cap"><h3 class="h3">Склади та логістика</h3><p>Швидкомонтовані каркаси складів і логістичних комплексів.</p></div></div>
+      <div class="panel" tabindex="0"><img src="assets/img/i-build.jpg" alt="" loading="lazy"><div class="cap"><h3 class="h3">Будівництво</h3><p>Каркаси багатоповерхових і комерційних будівель за проєктом генпідрядника.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 7 PROJECTS -->
+<section class="slide proj" id="projects" data-name="Проєкти">
+  <div class="wrap">
+    <div class="head">
+      <div><div class="sec-name rv"><i>07</i>Проєкти</div><h2 class="h2 rv d1">Виконані об'єкти</h2></div>
+      <div class="arrows rv d2">
+        <button class="prev" aria-label="Попередній проєкт"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 12H4M10 6l-6 6 6 6"/></svg></button>
+        <span class="pg"><b>01</b> / 06</span>
+        <button class="next" aria-label="Наступний проєкт"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h16M14 6l6 6-6 6"/></svg></button>
+      </div>
+    </div>
+    <div class="track-wrap rv d2"><div class="track" data-ph>
+      <article class="card"><img src="assets/img/pr-1.jpg" alt="" loading="lazy"><div class="top-c"><span class="small">Дніпропетровська обл.</span><h3 class="h3">Каркас складу готової продукції</h3></div><div class="bot-c"><div><b>24×72 м</b>габарити</div><div><b>186 т</b>металу</div></div></article>
+      <article class="card"><img src="assets/img/pr-2.jpg" alt="" loading="lazy"><div class="top-c"><span class="small">Кривий Ріг, ГЗК</span><h3 class="h3">Сходова вежа та площадки обслуговування</h3></div><div class="bot-c"><div><b>32 м</b>висота</div><div><b>48 т</b>металу</div></div></article>
+      <article class="card"><img src="assets/img/pr-3.jpg" alt="" loading="lazy"><div class="top-c"><span class="small">Збагачувальна фабрика</span><h3 class="h3">Похила конвеєрна галерея</h3></div><div class="bot-c"><div><b>54 м</b>довжина</div><div><b>72 т</b>металу</div></div></article>
+      <article class="card"><img src="assets/img/pr-4.jpg" alt="" loading="lazy"><div class="top-c"><span class="small">Запорізька обл.</span><h3 class="h3">Каркас виробничого цеху</h3></div><div class="bot-c"><div><b>30 м</b>проліт</div><div><b>240 т</b>металу</div></div></article>
+      <article class="card"><img src="assets/img/pr-5.jpg" alt="" loading="lazy"><div class="top-c"><span class="small">Полтавська обл.</span><h3 class="h3">Ангар для сільгосптехніки</h3></div><div class="bot-c"><div><b>18×48 м</b>габарити</div><div><b>21 день</b>монтаж</div></div></article>
+      <article class="card"><img src="assets/img/pr-6.jpg" alt="" loading="lazy"><div class="top-c"><span class="small">Кіровоградська обл.</span><h3 class="h3">Ферми покриття складського комплексу</h3></div><div class="bot-c"><div><b>24 м</b>проліт ферм</div><div><b>36 шт</b>ферм</div></div></article>
+    </div></div>
+  </div>
+</section>
+
+<!-- 8 CLIENTS -->
+<section class="slide clients" id="clients" data-name="Клієнти">
+  <div class="wrap">
+    <div>
+      <div class="sec-name rv"><i>08</i>Клієнти групи SCMA</div>
+      <h2 class="h2 rv d1">Нам довіряють лідери галузі</h2>
+      <p class="lead rv d2">Обладнання та конструкції групи SCMA працюють на комбінатах Метінвесту, АрселорМіттал Кривий Ріг, ДТЕК та інших промислових підприємствах України й світу.</p>
+      <p class="quote rv d3">Ми знаємо, як працюють служби закупівель і технагляду великих підприємств, тому готуємо документацію одразу у потрібному вигляді.</p>
+    </div>
+    <div class="logos">
+      <div class="logo-t cham cham-line rv d1"><div class="cham-in"><img src="assets/logos/arcelormittal.png" alt="АрселорМіттал Кривий Ріг" loading="lazy"></div></div>
+      <div class="logo-t cham cham-line rv d1"><div class="cham-in"><img src="assets/logos/metinvest.png" alt="Метінвест" loading="lazy"></div></div>
+      <div class="logo-t cham cham-line rv d2"><div class="cham-in"><img src="assets/logos/dtek.png" alt="ДТЕК" loading="lazy"></div></div>
+      <div class="logo-t cham cham-line rv d2"><div class="cham-in"><img src="assets/logos/ugok.png" alt="ПівдГЗК" loading="lazy"></div></div>
+      <div class="logo-t cham cham-line rv d2"><div class="cham-in"><img src="assets/logos/ingok.png" alt="ІнГЗК" loading="lazy"></div></div>
+      <div class="logo-t cham cham-line rv d3"><div class="cham-in"><img src="assets/logos/cgok.png" alt="ЦГЗК" loading="lazy"></div></div>
+      <div class="logo-t cham cham-line rv d3"><div class="cham-in"><img src="assets/logos/kzrk.png" alt="Криворізький залізорудний комбінат" loading="lazy"></div></div>
+      <div class="logo-t cham cham-line rv d3"><div class="cham-in"><img src="assets/logos/client2.png" alt="Суха Балка" loading="lazy"></div></div>
+      <div class="logo-t cham cham-line rv d4"><div class="cham-in"><img src="assets/logos/client3.png" alt="Запорізький залізорудний комбінат" loading="lazy"></div></div>
+      <div class="logo-t cham cham-line rv d4"><div class="cham-in"><img src="assets/logos/client4.png" alt="УКТМК" loading="lazy"></div></div>
+      <div class="logo-t cham cham-line rv d5"><div class="cham-in"><img src="assets/logos/client5.png" alt="Kazakhmys" loading="lazy"></div></div>
+      <div class="logo-t cham cham-line rv d5"><div class="cham-in"><img src="assets/logos/client1.png" alt="Клієнт групи SCMA" loading="lazy"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 9 TENDERS -->
+<section class="slide tender" id="tenders" data-name="Тендерам">
+  <div class="wrap">
+    <div>
+      <div class="sec-name rv"><i>09</i>Тендерам і закупівлям</div>
+      <h2 class="h2 rv d1">Готові до тендеру</h2>
+      <p class="lead rv d2">Беремо участь у закупівлях промислових підприємств і на Prozorro. Пакет кваліфікаційних документів надсилаємо в день запиту.</p>
+      <div class="ctas rv d3">
+        <a class="btn btn-y" href="#contact" data-go="9">Запросити до тендеру</a>
+        <a class="btn btn-o" href="#" onclick="return false" title="Файл буде додано">Реквізити компанії</a>
+      </div>
+      <div class="titan rv d4">
+        <img src="assets/img/titan-sunset.jpg" alt="Автомобільна вага ТИТАН на бетонному фундаменті" loading="lazy">
+        <div><b>Також у групі SCMA: автомобільні ваги ТИТАН</b><p class="small">Платформи 6–22 м на 30–100 т, монтаж по всій Україні від 3 днів.</p><a href="https://scma-kvk.com.ua/" target="_blank" rel="noopener">scma-kvk.com.ua</a></div>
+      </div>
+    </div>
+    <ul class="docs">
+      <li class="rv d1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 13l2 2 4-4"/></svg><div><b>Ліцензія на будівельні роботи</b><span>Монтаж власними бригадами без субпідрядників</span></div></li>
+      <li class="rv d2" data-ph><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 13l2 2 4-4"/></svg><div><b>Система якості ISO 9001</b><span>Управління якістю на всіх етапах виробництва</span></div></li>
+      <li class="rv d3" data-ph><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 13l2 2 4-4"/></svg><div><b>Виготовлення за ДСТУ EN 1090</b><span>Клас виконання EXC2 для будівельних металоконструкцій</span></div></li>
+      <li class="rv d4"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 13l2 2 4-4"/></svg><div><b>Паспорти та сертифікати якості</b><span>Сертифікати на метал і виконавча документація до кожної партії</span></div></li>
+      <li class="rv d5"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 13l2 2 4-4"/></svg><div><b>Референс-лист</b><span>Підтверджений досвід робіт для ГЗК і металургійних підприємств</span></div></li>
+    </ul>
+  </div>
+</section>
+
+<!-- 10 CONTACT -->
+<section class="slide contact" id="contact" data-name="Контакти">
+  <div class="wrap">
+    <div>
+      <div class="sec-name rv"><i>10</i>Контакти</div>
+      <h2 class="h2 rv d1">Розрахуємо ваш проєкт</h2>
+      <p class="lead rv d2">Надішліть креслення, специфікацію або опис задачі. Інженер зв'яжеться з вами протягом робочого дня.</p>
+      <div class="c-list">
+        <div class="rv d2"><span class="small">Відділ продажу</span><a class="big" href="tel:+380676326798">+38 (067) 632-67-98</a></div>
+        <div class="rv d3"><span class="small">Пошта</span><a href="mailto:scma@ukr.net">scma@ukr.net</a></div>
+        <div class="rv d4"><span class="small">Завод</span><p>вул. Цимлянська, 8Д, м. Кривий Ріг,<br>Дніпропетровська обл., 50000</p></div>
+      </div>
+    </div>
+    <form class="rv d2" novalidate>
+      <h3 class="h3">Заявка на розрахунок</h3>
+      <p class="small">Поля з позначкою * обов'язкові</p>
+      <div class="fgrid">
+        <div class="field"><label for="f-name">Ім'я *</label><input id="f-name" name="name" autocomplete="name" required></div>
+        <div class="field"><label for="f-phone">Телефон *</label><input id="f-phone" name="phone" type="tel" autocomplete="tel" placeholder="+38 0__ ___ __ __" required></div>
+        <div class="field"><label for="f-company">Компанія</label><input id="f-company" name="company" autocomplete="organization"></div>
+        <div class="field"><label for="f-mail">Email</label><input id="f-mail" name="email" type="email" autocomplete="email"></div>
+        <div class="field full"><label for="f-msg">Що потрібно виготовити</label><textarea id="f-msg" name="message" placeholder="Наприклад: каркас складу 24×60 м, висота 8 м, з монтажем"></textarea></div>
+        <label class="file field full" for="f-file">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 16V4M7 9l5-5 5 5"/><path d="M4 16v4h16v-4"/></svg>
+          <span class="t"><span class="fname">Прикріпити креслення</span><small>PDF, DWG, DXF або фото, до 25 МБ</small></span>
+          <input id="f-file" class="sr" type="file" name="file" accept=".pdf,.dwg,.dxf,.jpg,.jpeg,.png">
+        </label>
+      </div>
+      <div class="f-foot">
+        <button class="btn btn-y" type="submit">Надіслати заявку</button>
+        <p class="small">Натискаючи кнопку, ви погоджуєтесь на обробку персональних даних.</p>
+      </div>
+      <p class="ok" role="status" aria-live="polite">Заявку надіслано. Інженер зателефонує вам протягом робочого дня. <span class="small">(демо: форма поки нікуди не відправляє дані)</span></p>
+    </form>
+  </div>
+  <footer>
+    <div class="ua-line"></div>
+    <div class="f-row">
+      <span class="brand" role="img" aria-label="SCMA KZMK"><span class="b-row"><span class="b-word"><span>S</span><span>C</span><span>M</span><span>A</span></span><span class="b-sup"><span>K</span><span>Z</span><span>M</span><span>K</span></span></span><span class="b-tag">криворізький завод металевих конструкцій</span></span>
+      <span>© 2026 SCMA KZMK. Криворізький завод металевих конструкцій</span>
+      <span>Частина групи SCMA</span>
+    </div>
+  </footer>
+</section>
+
+</main>
+
+<script>
+(()=>{
+const $=(s,c=document)=>c.querySelector(s), $$=(s,c=document)=>[...c.querySelectorAll(s)];
+const root=document.documentElement, deck=$('#deck'), slides=$$('.slide'), N=slides.length;
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const fpQuery=matchMedia('(min-width: 1024px) and (min-height: 660px)');
+let fp=false, cur=0, lock=false;
+
+/* ---------- isometric line art ---------- */
+const C30=Math.cos(Math.PI/6), S30=.5;
+const P=(x,y,z)=>[(x-y)*C30,(x+y)*S30-z];
+function circle(cx,cy,cz,r,plane,n=40){const pts=[];for(let i=0;i<=n;i++){const a=i/n*Math.PI*2,c=Math.cos(a)*r,s=Math.sin(a)*r;
+  pts.push(plane==='xy'?[cx+c,cy+s,cz]:plane==='yz'?[cx,cy+c,cz+s]:[cx+c,cy,cz+s]);}return pts}
+const ART={
+ hangar(){const L=[],W=10,H=5,R=2.4,D=16;
+  for(let y=0;y<=D;y+=4){L.push([[0,y,0],[0,y,H]],[[W,y,0],[W,y,H]],[[0,y,H],[W/2,y,H+R],[W,y,H]],[[1.6,y,H+R*.32],[W/2,y,H+R]],[[0,y,H*.75],[1.4,y,H]]);
+    if(y<D)L.push([[0,y,0],[0,y+4,H*.6]],[[W,y,0],[W,y+4,H*.6]]);}
+  L.push([[0,0,H],[0,D,H]],[[W,0,H],[W,D,H]],[[W/2,0,H+R],[W/2,D,H+R]],[[W/4,0,H+R/2],[W/4,D,H+R/2]],[[3*W/4,0,H+R/2],[3*W/4,D,H+R/2]],[[0,0,0],[0,D,0]],[[W,0,0],[W,D,0]]);return L},
+ truss(){const L=[],Ln=18,h=3,n=8,d=1.4;
+  for(const y of [0,d]){L.push([[0,y,0],[Ln,y,0]],[[0,y,0],[Ln/2,y,h],[Ln,y,0]]);
+   for(let i=1;i<n;i++){const x=i*Ln/n,zt=h*(1-Math.abs(2*x/Ln-1));L.push([[x,y,0],[x,y,zt]]);
+    if(i<n/2)L.push([[x,y,0],[x+Ln/n,y,h*(1-Math.abs(2*(x+Ln/n)/Ln-1))]]);else if(i>n/2)L.push([[x,y,0],[x-Ln/n,y,h*(1-Math.abs(2*(x-Ln/n)/Ln-1))]]);}}
+  for(let i=0;i<=n;i+=2){const x=i*Ln/n,zt=h*(1-Math.abs(2*x/Ln-1));L.push([[x,0,zt],[x,d,zt]],[[x,0,0],[x,d,0]]);}return L},
+ beam(){const L=[],Ln=16,b=3,h=4,tf=.55,tw=.45;
+  const pr=[[-b/2,0],[b/2,0],[b/2,tf],[tw/2,tf],[tw/2,h-tf],[b/2,h-tf],[b/2,h],[-b/2,h],[-b/2,h-tf],[-tw/2,h-tf],[-tw/2,tf],[-b/2,tf],[-b/2,0]];
+  for(const x of [0,Ln])L.push(pr.map(([y,z])=>[x,y,z]));
+  for(const [y,z] of pr.slice(0,12))L.push([[0,y,z],[Ln,y,z]]);
+  for(const x of [3,8,13])L.push(circle(x,b/2-.6,h,.28,'xy',16),circle(x,-b/2+.6,h,.28,'xy',16));return L},
+ tank(){const L=[],r=4.2,H=8.5;
+  for(const z of [0,H*.33,H*.66,H])L.push(circle(0,0,z,r,'xy',56));
+  L.push([[r*C30*0+r*.7071,-r*.7071,0],[r*.7071,-r*.7071,H]],[[-r*.7071,r*.7071,0],[-r*.7071,r*.7071,H]]);
+  for(let i=0;i<12;i++){const a=i/12*Math.PI*2;L.push([[Math.cos(a)*r,Math.sin(a)*r,H],[0,0,H+1.6]]);}
+  L.push([[r,0,0],[r,0,H+.6]],[[r+.8,0,0],[r+.8,0,H+.6]]);for(let z=.6;z<H;z+=.8)L.push([[r,0,z],[r+.8,0,z]]);
+  L.push([[r-.2,-.5,H+.6],[r+.9,-.5,H+.6],[r+.9,.6,H+.6]]);return L},
+ stairs(){const L=[],n=9,run=.75,rise=1,w=2.6,top=n*rise,x1=n*run;
+  for(const y of [0,w]){L.push([[0,y,0],[x1,y,top]],[[0,y,1.1],[x1,y,top+1.1]]);for(let i=0;i<=n;i+=2)L.push([[i*run,y,i*rise],[i*run,y,i*rise+1.1]]);}
+  for(let i=1;i<=n;i++)L.push([[i*run-run,0,i*rise],[i*run-run,w,i*rise]],[[i*run-run,0,i*rise],[i*run,0,i*rise]]);
+  const px=x1,pw=4;L.push([[px,0,top],[px+pw,0,top],[px+pw,w+1.5,top],[px,w+1.5,top],[px,0,top]]);
+  for(const [x,y] of [[px+pw,0],[px+pw,w+1.5],[px,w+1.5]])L.push([[x,y,0],[x,y,top]]);
+  L.push([[px+pw,0,top+1.1],[px+pw,w+1.5,top+1.1],[px,w+1.5,top+1.1]],[[px,0,top+1.1],[px+pw,0,top+1.1]]);
+  L.push([[px+pw,0,top/2],[px+pw,w+1.5,top/2]],[[px+pw,0,0],[px+pw,w+1.5,top/2]]);return L},
+ gallery(){const L=[],x0=0,z0=1.5,Ln=18,rise=12,w=2.4,h=2.2,n=6;
+  const pt=(t,y,dz)=>[x0+Ln*t,y,z0+rise*t+dz];
+  for(const y of [0,w])for(const dz of [0,h])L.push([pt(0,y,dz),pt(1,y,dz)]);
+  for(let i=0;i<=n;i++){const t=i/n;L.push([pt(t,0,0),pt(t,0,h)],[pt(t,w,0),pt(t,w,h)],[pt(t,0,h),pt(t,w,h)],[pt(t,0,0),pt(t,w,0)]);
+   if(i<n)L.push([pt(t,0,0),pt(t+1/n,0,h)],[pt(t,w,0),pt(t+1/n,w,h)]);}
+  for(const t of [.33,.8]){const [x,,z]=pt(t,0,0);for(const y of [-.3,w+.3])L.push([[x-.7,y,0],[x,y<0?0:w,z]],[[x+.7,y,0],[x,y<0?0:w,z]]);L.push([[x-.7,-.3,0],[x+.7,-.3,0]],[[x-.7,w+.3,0],[x+.7,w+.3,0]]);}
+  return L},
+ custom(){const L=[],Ln=10,w=5,h=1.6,r=2.2;
+  const box=(a,b,c,A,B,Cc)=>{const v=[[a,b,c],[A,b,c],[A,B,c],[a,B,c]];L.push([...v,v[0]],[...v.map(p=>[p[0],p[1],Cc]),[a,b,Cc]]);v.forEach(p=>L.push([p,[p[0],p[1],Cc]]));};
+  box(0,0,0,Ln,w,h);
+  for(const x of [1.2,Ln-1.2]){L.push([[x,.6,h],[x,w/2,h+r+.4],[x,w-.6,h]]);}
+  for(const x of [1.6,Ln-1.6])L.push(circle(x,w/2,h+r+.4,r,'yz',40));
+  for(let i=0;i<12;i++){const a=i/12*Math.PI*2;L.push([[1.6,w/2+Math.cos(a)*r,h+r+.4+Math.sin(a)*r],[Ln-1.6,w/2+Math.cos(a)*r,h+r+.4+Math.sin(a)*r]]);}
+  L.push(circle(Ln-1.2,w/2,h+r+.4,.5,'yz',16),[[Ln-1.2,w/2,h+r+.4],[Ln+1,w/2,h+r+.4]]);return L}
+};
+$$('[data-art]').forEach(el=>{
+  const lines=ART[el.dataset.art]().filter(l=>l.length>1);
+  const pts=lines.flat().map(p=>P(...p)); const xs=pts.map(p=>p[0]), ys=pts.map(p=>p[1]);
+  const minX=Math.min(...xs),maxX=Math.max(...xs),minY=Math.min(...ys),maxY=Math.max(...ys),pad=.6;
+  const d=lines.map(l=>'M'+l.map(p=>P(...p).map(v=>v.toFixed(2)).join(' ')).join('L')).join('');
+  const vw=maxX-minX+2*pad, vh=maxY-minY+2*pad;
+  el.innerHTML=`<svg viewBox="${(minX-pad).toFixed(2)} ${(minY-pad).toFixed(2)} ${vw.toFixed(2)} ${vh.toFixed(2)}" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path pathLength="1" d="${d}"/></svg>`;
+  // ~1.2px line regardless of drawing scale
+  const fit=()=>{const r=el.getBoundingClientRect();if(!r.width)return;const scale=Math.min(r.width/vw,r.height/vh);el.querySelector('path').setAttribute('stroke-width',(1.2/scale).toFixed(3))};
+  fit(); addEventListener('resize',fit);
+});
+
+/* ---------- logo tagline: fit width to "SCMA KZMK" ---------- */
+function fitBrands(){$$('.brand').forEach(b=>{const row=$('.b-row',b), tag=$('.b-tag',b);
+  tag.style.fontSize=''; const fs=parseFloat(getComputedStyle(tag).fontSize), rw=row.getBoundingClientRect().width, tw=tag.getBoundingClientRect().width;
+  if(rw&&tw)tag.style.fontSize=(fs*rw/tw*.995).toFixed(2)+'px';})}
+fitBrands(); document.fonts&&document.fonts.ready.then(fitBrands); addEventListener('resize',fitBrands);
+
+/* ---------- side index ---------- */
+const idx=$('.index');
+slides.forEach((s,i)=>{const b=document.createElement('button');b.innerHTML=`<span class="lbl">${s.dataset.name}</span><span class="bar"></span>`;b.setAttribute('aria-label',s.dataset.name);b.onclick=()=>go(i);idx.appendChild(b)});
+const dots=$$('button',idx), counter=$('.counter b'), top=$('#top');
+const navMap={2:'products',4:'production',6:'projects',8:'tenders',9:'contact'};
+
+/* ---------- counters ---------- */
+function countUp(sec){$$('[data-count]',sec).forEach(el=>{if(el.dataset.done)return;el.dataset.done=1;
+  const end=+el.dataset.count, sup=el.querySelector('sup'), t0=performance.now(), dur=reduce?1:1600;
+  const tick=t=>{const k=Math.min(1,(t-t0)/dur), v=Math.round(end*(1-Math.pow(1-k,3)));el.firstChild.nodeValue=v.toLocaleString('uk-UA');if(k<1)requestAnimationFrame(tick)};
+  requestAnimationFrame(tick);});}
+
+/* ---------- headings: split into words for mask reveal ---------- */
+$$('.h2').forEach(h=>{const words=h.textContent.trim().split(/\s+/);
+  h.setAttribute('aria-label',words.join(' '));
+  h.innerHTML=words.map((w,k)=>`<span class="w" aria-hidden="true"><span style="--d:${(.12+k*.07).toFixed(2)}s">${w}</span></span>`).join(' ');});
+
+/* ---------- replay: reset slides we left, so they animate again next time ---------- */
+const resetT=new Map();
+function scheduleReset(k){clearTimeout(resetT.get(k));resetT.set(k,setTimeout(()=>{const s=slides[k];if(!fp||cur===k||k===0)return;
+  s.classList.add('noanim');s.classList.remove('seen');
+  $$('[data-count]',s).forEach(e=>{delete e.dataset.done;e.firstChild.nodeValue='0'});
+  void s.offsetWidth;s.classList.remove('noanim');},950))}
+
+function mark(i){
+  const prev=cur;
+  cur=i; slides.forEach((s,k)=>{s.classList.toggle('is-active',k===i);s.classList.toggle('before',k<i);s.classList.toggle('after',k>i)});
+  if(fp&&prev!==i)scheduleReset(prev);
+  slides[i].classList.add('seen'); countUp(slides[i]);
+  dots.forEach((d,k)=>d.classList.toggle('on',k===i)); counter.textContent=String(i+1).padStart(2,'0');
+  counter.parentElement.style.opacity=i===0?0:1;
+  $('.totop').classList.toggle('show',i>0);
+  top.classList.toggle('solid',i>0);
+  $$('.nav a').forEach(a=>a.classList.toggle('on',a.dataset.go==i));
+  const v=$('.hero video'); if(v){i===0?v.play().catch(()=>{}):fp&&v.pause();}
+}
+function go(i){
+  i=Math.max(0,Math.min(N-1,i));
+  if(!fp){slides[i].scrollIntoView({behavior:reduce?'auto':'smooth'});return}
+  if(i===cur&&deck.style.transform)return;
+  lock=true; deck.style.transform=`translate3d(0,${-i*100}dvh,0)`; mark(i); setTimeout(()=>edges(),60);
+  history.replaceState(null,'','#'+slides[i].id);
+  setTimeout(()=>lock=false,reduce?50:880);
+}
+
+/* ---------- input (fullpage mode) ---------- */
+// One wheel notch = one slide. Trackpad inertia is ignored until the gesture ends
+// (pause > 140 ms) or a new flick starts (delta suddenly grows).
+let lastT=0, lastD=0, used=false;
+addEventListener('wheel',e=>{ if(!fp)return; if(e.ctrlKey)return; e.preventDefault();
+  const raw=Math.abs(e.deltaX)>Math.abs(e.deltaY)?e.deltaX:e.deltaY;
+  const now=performance.now(), d=e.deltaMode===1?raw*16:raw, ad=Math.abs(d);
+  const fresh=now-lastT>140||ad>Math.abs(lastD)*1.6+4;
+  lastT=now; lastD=d; if(fresh)used=false;
+  if(lock||used||ad<1)return;
+  // над карточками проєктів колесо гортає картки; на краю — переходить на сусідній екран
+  if(slides[cur].id==='projects'&&e.target.closest&&e.target.closest('.track-wrap')){
+    const dir=d>0?1:-1, np=pI+dir;
+    if(np>=0&&np<=lastP()){used=true;lock=true;setP(np);setTimeout(()=>lock=false,520);return}
+  }
+  used=true; go(cur+(d>0?1:-1));},{passive:false});
+addEventListener('keydown',e=>{ if(!fp||lock)return; if(/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName))return;
+  if(['ArrowDown','PageDown',' '].includes(e.key)){e.preventDefault();go(cur+1)}
+  else if(['ArrowUp','PageUp'].includes(e.key)){e.preventDefault();go(cur-1)}
+  else if(e.key==='Home'){e.preventDefault();go(0)} else if(e.key==='End'){e.preventDefault();go(N-1)}});
+let ty=null; addEventListener('touchstart',e=>{ty=e.touches[0].clientY},{passive:true});
+addEventListener('touchend',e=>{if(!fp||ty===null||lock)return;const dy=ty-e.changedTouches[0].clientY;if(Math.abs(dy)>50)go(cur+(dy>0?1:-1));ty=null},{passive:true});
+// keep focused elements on screen
+document.addEventListener('focusin',e=>{if(!fp)return;const s=e.target.closest('.slide');if(s){const i=slides.indexOf(s);if(i!==cur){go(i)}}});
+$$('[data-go]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();document.body.classList.remove('menu-open');go(+a.dataset.go)}));
+
+/* ---------- mode switch ---------- */
+let io;
+function setMode(){
+  fp=fpQuery.matches&&!reduce;
+  root.classList.toggle('fp',fp);
+  if(io){io.disconnect();io=null}
+  if(fp){
+    const h=location.hash.slice(1), start=Math.max(0,slides.findIndex(s=>s.id===h));
+    deck.style.transition='none'; deck.style.transform=`translate3d(0,${-start*100}dvh,0)`; mark(start);
+    requestAnimationFrame(()=>requestAnimationFrame(()=>deck.style.transition=''));
+  }else{
+    deck.style.transform=''; slides.forEach(s=>s.classList.remove('before','after'));
+    io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){const i=slides.indexOf(en.target);mark(i)}}),{threshold:.35});
+    slides.forEach(s=>io.observe(s));
+    addEventListener('scroll',()=>top.classList.toggle('solid',scrollY>40),{passive:true});
+  }
+}
+fpQuery.addEventListener('change',setMode); setMode();
+requestAnimationFrame(()=>slides[0].classList.add('seen'));
+
+/* ---------- stats: cursor glow on frames + scramble on hover ---------- */
+const statsBox=$('.stats'), statEls=$$('.stat');
+statsBox.addEventListener('mousemove',e=>statEls.forEach(s=>{const r=s.getBoundingClientRect();s.style.setProperty('--x',(e.clientX-r.left)+'px');s.style.setProperty('--y',(e.clientY-r.top)+'px')}));
+statsBox.addEventListener('mouseleave',()=>statEls.forEach(s=>s.style.setProperty('--y','-300px')));
+
+/* ---------- client logos: equal visual weight (same area, centered) ---------- */
+function sizeLogos(){$$('.logo-t img').forEach(img=>{if(!img.naturalWidth)return;
+  const t=img.parentElement.getBoundingClientRect(), ar=img.naturalWidth/img.naturalHeight;
+  let h=t.height*.46/Math.sqrt(ar)*1.38, w=h*ar;
+  const maxW=t.width*.84, maxH=t.height*.8; if(w>maxW){w=maxW;h=w/ar} if(h>maxH){h=maxH;w=h*ar}
+  img.style.width=w.toFixed(1)+'px'; img.style.height=h.toFixed(1)+'px';})}
+$$('.logo-t img').forEach(i=>{i.loading='eager';i.complete?sizeLogos():i.addEventListener('load',sizeLogos)});
+addEventListener('resize',sizeLogos); sizeLogos();
+
+/* ---------- edge arrows ---------- */
+const eUp=$('.edge-up'), eDown=$('.edge-down'); let mouseY=-1;
+function edges(){if(!fp||mouseY<0){eUp.classList.remove('show');eDown.classList.remove('show');document.body.classList.remove('edge-low');return}
+  const head=top.getBoundingClientRect().height, low=mouseY>innerHeight-110, high=mouseY>head-4&&mouseY<head+110;
+  eDown.classList.toggle('show',low&&cur<N-1); eUp.classList.toggle('show',high&&cur>0);
+  document.body.classList.toggle('edge-low',low&&cur<N-1);}
+addEventListener('mousemove',e=>{mouseY=e.clientY;edges()},{passive:true});
+document.addEventListener('mouseleave',()=>{mouseY=-1;edges()});
+eDown.addEventListener('click',()=>{go(cur+1);setTimeout(edges,50)});
+eUp.addEventListener('click',()=>{go(cur-1);setTimeout(edges,50)});
+
+/* ---------- back to top ---------- */
+$('.totop').addEventListener('click',()=>{if(fp)go(0);else scrollTo({top:0,behavior:reduce?'auto':'smooth'})});
+
+/* ---------- burger ---------- */
+$('.burger').onclick=()=>{const o=document.body.classList.toggle('menu-open');$('.burger').setAttribute('aria-expanded',o)};
+
+/* ---------- cycle steps ---------- */
+const steps=$$('.step'), bgs=$$('.cycle .bgs img'); let sIdx=0, sTimer;
+function setStep(i){sIdx=i;steps.forEach((s,k)=>{s.classList.toggle('on',k===i);s.setAttribute('aria-selected',k===i)});bgs.forEach((b,k)=>b.classList.toggle('on',k===i))}
+steps.forEach((s,i)=>{s.addEventListener('click',()=>{setStep(i);clearInterval(sTimer)});s.addEventListener('mouseenter',()=>{setStep(i);clearInterval(sTimer)})});
+const cyc=$('#cycle'); new MutationObserver(()=>{clearInterval(sTimer);if(cyc.classList.contains('is-active')&&!reduce)sTimer=setInterval(()=>setStep((sIdx+1)%steps.length),4200)}).observe(cyc,{attributes:true,attributeFilter:['class']});
+
+/* ---------- industries accordion ---------- */
+const panels=$$('.acc .panel');
+panels.forEach(p=>{const on=()=>panels.forEach(q=>q.classList.toggle('on',q===p));p.addEventListener('mouseenter',on);p.addEventListener('focus',on);p.addEventListener('click',on)});
+
+/* ---------- projects slider ---------- */
+const track=$('.track'), cards=$$('.card'), pg=$('.arrows .pg b'); let pI=0;
+function setP(i){pI=(i+cards.length)%cards.length;const w=cards[0].getBoundingClientRect().width+12;
+  const maxShift=track.scrollWidth-track.parentElement.clientWidth; track.style.transform=`translateX(${-Math.min(pI*w,Math.max(0,maxShift))}px)`;pg.textContent=String(pI>=lastP()?cards.length:pI+1).padStart(2,'0')}
+function lastP(){const w=cards[0].getBoundingClientRect().width+12, maxShift=track.scrollWidth-track.parentElement.clientWidth;return Math.max(0,Math.ceil(maxShift/w-.01))}
+$('.arrows .next').onclick=()=>setP(pI>=lastP()?0:pI+1); $('.arrows .prev').onclick=()=>setP(pI<=0?lastP():pI-1);
+addEventListener('resize',()=>setP(pI));
+
+/* ---------- form (demo) ---------- */
+const form=$('form'), file=$('#f-file');
+file.addEventListener('change',()=>{$('.fname').textContent=file.files[0]?file.files[0].name:'Прикріпити креслення'});
+form.addEventListener('submit',e=>{e.preventDefault();
+  const bad=[$('#f-name'),$('#f-phone')].filter(i=>!i.value.trim());
+  bad.forEach(i=>i.style.borderColor='#FF6B5B'); if(bad.length){bad[0].focus();return}
+  form.classList.add('sent'); $('button[type=submit]',form).textContent='Надіслано';});
+$$('.field input').forEach(i=>i.addEventListener('input',()=>i.style.borderColor=''));
+})();
+</script>
+</body>
+</html>
