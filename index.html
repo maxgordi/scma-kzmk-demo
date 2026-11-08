@@ -415,9 +415,9 @@ footer{width:100%;margin-top:clamp(20px,3vh,40px)}
   .burger{display:block}
   .menu-open .nav{display:flex;position:fixed;inset:var(--head) 0 0 0;flex-direction:column;gap:6px;padding:28px var(--pad);background:rgba(8,9,15,.97);margin:0}
   .menu-open .nav a{font-family:"Tektur";font-variation-settings:"wdth" 75;font-size:34px;text-transform:uppercase;font-weight:600}
-  .slide{padding-top:calc(var(--head) + 28px);padding-bottom:56px}
-  .hero{min-height:100svh}
-  .hero-foot .l,.hero-foot .r{display:none}
+  .slide{padding-top:52px;padding-bottom:44px;scroll-margin-top:var(--head)}
+  .hero{min-height:92svh;padding-top:calc(var(--head) + 24px);padding-bottom:64px}
+  .hero-foot .l,.hero-foot .r,.hero-foot .cue{display:none}
   .about .wrap,.prod .wrap,.clients .wrap,.tender .wrap,.contact .wrap{grid-template-columns:1fr}
   .tiles{grid-template-columns:repeat(2,1fr)}
   .tile{height:220px}
@@ -893,8 +893,12 @@ function setMode(){
     requestAnimationFrame(()=>requestAnimationFrame(()=>deck.style.transition=''));
   }else{
     deck.style.transform=''; slides.forEach(s=>s.classList.remove('before','after'));
-    io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){const i=slides.indexOf(en.target);mark(i)}}),{threshold:.35});
+    // активний екран = той, що перетинає середину вікна
+    io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){const i=slides.indexOf(en.target);mark(i)}}),{rootMargin:'-45% 0px -45% 0px',threshold:0});
     slides.forEach(s=>io.observe(s));
+    // поява анімацій: щойно верх наступного екрана зайшов у нижню частину вікна (не чекаємо, поки попередній прокрутиться)
+    const rvIO=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){en.target.classList.add('seen');countUp(en.target)}}),{rootMargin:'0px 0px -8% 0px',threshold:0});
+    slides.forEach(s=>rvIO.observe(s));
     addEventListener('scroll',()=>top.classList.toggle('solid',scrollY>40),{passive:true});
   }
 }
